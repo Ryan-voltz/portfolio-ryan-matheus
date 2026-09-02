@@ -34,6 +34,13 @@ export default function LocaleSwitcher({ label, className }: Props) {
                 locale={loc}
                 hrefLang={localeTags[loc]}
                 aria-current={isActive ? 'true' : undefined}
+                // Switching locale re-renders the whole [locale] tree because
+                // the dynamic segment's param value changes, which Next reads
+                // as "the entire route changed" — its scroll-into-view fallback
+                // then walks body's children from the end and lands on the
+                // footer. Only the visible text changes here, so the reader's
+                // scroll position is exactly what should stay put.
+                scroll={false}
                 className="u-label relative block px-2.5 py-1.5 transition-colors duration-200 hover:text-[var(--ink)] data-[on=true]:text-[var(--red-ink)]"
                 data-on={isActive}
               >

@@ -81,6 +81,12 @@ export async function generateMetadata({
       description: t('description'),
     },
     robots: { index: true, follow: true },
+    // The site already ships real, authored translations in EN/PT/ES with
+    // correct hreflang alternates and a visible language switcher — Chrome's
+    // "Translate this page?" prompt only offers a worse, machine-translated
+    // copy of a page the visitor can already read natively. Opting out here
+    // is the standard fix for a properly localized site.
+    other: { google: 'notranslate' },
   };
 }
 
