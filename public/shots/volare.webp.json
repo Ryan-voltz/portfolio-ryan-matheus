@@ -1,0 +1,4 @@
+{
+  "prompt": "SOURCED, NOT GENERATED. Automated headless-Chromium screenshot of the live production site https://volarecompany.com.br/, captured at 1440x900 @2x on 2026-09-02 and downscaled to 1600px wide WebP (quality 78). Real page built by Ryan Matheus. No AI generation, no stock, no compositing. Recapture with: node scripts/capture-sites.mjs volare",
+  "createdAt": "2026-09-02T14:39:11.613Z"
+}

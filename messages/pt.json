@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "titleSuffix": "Sistemas sob medida — CRM, ERP e E-commerce",
+    "description": "Desenvolvedor full-stack que constrói sistemas de gestão sob medida — CRM, ERP, e-commerce e plataformas de compliance. Três deles arquitetados, desenvolvidos e entregues de ponta a ponta, sozinho."
+  },
+  "nav": {
+    "home": "Ryan Matheus — início",
+    "sections": "Seções",
+    "language": "Idioma",
+    "start": "Início",
+    "about": "Sobre",
+    "work": "Cases",
+    "projects": "Projetos",
+    "contact": "Contato",
+    "write": "Escrever"
+  },
+  "common": {
+    "skipToContent": "Ir para o conteúdo",
+    "stack": "Stack",
+    "drawnBy": "Desenvolvido por",
+    "soleAuthor": "Ryan Matheus — 100%",
+    "openSheet": "Abrir prancha {sheet}",
+    "detail": "Detalhe",
+    "item": "Item",
+    "project": "Projeto",
+    "type": "Tipo",
+    "experience": "Experiência",
+    "systems": "Sistemas",
+    "scale": "Escala",
+    "sheet": "Prancha",
+    "rev": "Rev",
+    "status": "Status",
+    "stackRole": {
+      "react": "Camada de interface",
+      "vite": "Build e servidor de desenvolvimento",
+      "supabase": "Banco de dados, autenticação e API",
+      "framermotion": "Movimento da interface"
+    }
+  },
+  "home": {
+    "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce e plataformas de compliance — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
+    "stage1": "Arquitetura",
+    "stage2": "Desenvolvimento",
+    "stage3": "Refinamento",
+    "stage4": "Entrega",
+    "span": "Ryan Matheus — 100%",
+    "cta": "Falar com o Ryan",
+    "ctaSecondary": "Ver os cases",
+    "indexLabel": "Detalhes deste conjunto",
+    "meta": {
+      "experience": "3+ anos",
+      "systems": "08 no ar",
+      "status": "Disponível para novos projetos"
+    },
+    "about": {
+      "gutter": "Notas",
+      "heading": "Uma pessoa, a entrega inteira",
+      "lead": "De onde eu vim, o que eu construo, e como um sistema sai de um requisito e chega ao handoff.",
+      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce e plataformas de compliance e financeiras — para empresas de varejo, educação e serviços profissionais.",
+      "n2": "Comecei como assistente de TI numa empresa de logística e despacho aduaneiro, trabalhando nos sistemas internos deles. Foi ali que aprendi SQL, PHP, Firebird e Laravel.",
+      "n3": "Fundei a Voltz Agency, onde desenvolvo pessoalmente os sistemas principais da empresa, de ponta a ponta. Também aceito projetos freelance selecionados, diretamente.",
+      "n4": "Conduzo todo o processo de entrega: levantamento de requisitos e arquitetura do sistema, desenvolvimento acelerado por IA no front-end e no back-end, e refinamento manual — segurança, casos de borda e finalização — antes de cada entrega. Tenho certificação em engenharia de prompt.",
+      "n5": "Construí minha própria ferramenta automatizada de auditoria para testar os sistemas entregues de ponta a ponta.",
+      "portraitTag": "A fornecer",
+      "portraitNote": "Este detalhe ainda não foi emitido.",
+      "portraitCaption": "Detalhe D — retrato"
+    },
+    "work": {
+      "gutter": "Detalhes",
+      "heading": "Três sistemas, feitos sozinho",
+      "lead": "Cada um destes eu desenvolvi de ponta a ponta, sozinho — arquitetura, front-end, back-end, refinamento e entrega. Cada um tem a sua própria prancha.",
+      "seeSheet": "Abrir prancha"
+    },
+    "projects": {
+      "gutter": "Relação",
+      "heading": "Outros projetos",
+      "lead": "Mais {count} sistemas construídos para empresas de varejo, educação e autopeças. Cada linha abre o site no ar."
+    }
+  },
+  "projects": {
+    "seu-puto-store": {
+      "name": "Seu Puto Store",
+      "type": "E-commerce de moda e streetwear"
+    },
+    "overall-cla": {
+      "name": "Overall Clã",
+      "type": "E-commerce de suplementos com área administrativa e CRM próprios"
+    },
+    "fipec": {
+      "name": "Fipec",
+      "type": "E-commerce de autopeças com orçamento via WhatsApp"
+    },
+    "g7-comercio": {
+      "name": "G7 Comércio",
+      "type": "Plataforma de projetos pedagógicos e formação de professores (BNCC)"
+    },
+    "grupo-educare": {
+      "name": "Grupo Educare",
+      "type": "Distribuidora de livros didáticos para redes de ensino em todo o Brasil"
+    }
+  },
+  "work": {
+    "volare": {
+      "name": "Volare Company",
+      "type": "Plataforma de compliance em licitações públicas",
+      "summary": "Assessoria em licitações públicas: busca automatizada no PNCP, monitoramento contínuo de editais e conformidade com a Lei 14.133/2021.",
+      "shotAlt": "A página inicial da Volare Company, apresentando o serviço de assessoria em licitações públicas.",
+      "context": "A Volare Company assessora empresas que vendem para o setor público brasileiro. Toda oportunidade começa como um edital publicado no PNCP — o portal de compras do governo federal — e cada um precisa ser lido à luz da Lei 14.133/2021, a lei de licitações e contratos, antes de a empresa se comprometer a disputar.",
+      "challenge": "Encontrar os editais relevantes no PNCP e acompanhar os que já estavam em disputa era trabalho feito na mão, edital por edital. A plataforma precisava automatizar essa busca, continuar acompanhando os editais conforme eles mudam, e manter os requisitos da Lei 14.133/2021 junto de cada um.",
+      "delivered": {
+        "d1": "Busca automatizada no PNCP, o portal de compras públicas do governo brasileiro.",
+        "d2": "Monitoramento contínuo de editais.",
+        "d3": "Conformidade com a Lei 14.133/2021 incorporada à forma como os editais são tratados.",
+        "d4": "Arquitetura, front-end, back-end, refinamento e entrega — desenvolvido por mim, sozinho, 100%."
+      },
+      "result": "A plataforma foi lançada recentemente e ainda está em uso inicial, então não há números de resultado a informar — e nenhum foi inventado aqui. O que ela muda hoje é qualitativo: uma busca que antes era feita na mão agora roda automaticamente, e os editais passam a ser acompanhados de forma contínua em vez de conferidos um a um."
+    },
+    "voltz-hub": {
+      "name": "Voltz Hub",
+      "type": "SaaS de gestão de tarefas e projetos",
+      "summary": "Produto interno da própria Voltz Agency para gestão de tarefas e projetos — arquitetado, desenvolvido e publicado por mim, como fundador da agência.",
+      "shotAlt": "A página inicial do Voltz Hub, apresentando o produto de gestão de tarefas e projetos.",
+      "context": "O Voltz Hub é o produto da própria Voltz Agency. Fundei a Voltz e desenvolvi o Voltz Hub de ponta a ponta, sozinho — o que significa que os requisitos vieram de dentro da empresa, não de um briefing de cliente.",
+      "challenge": "Gestão de tarefas e gestão de projetos precisavam funcionar como um produto só, não como dois conjuntos de telas que apenas dividem o mesmo login. Isso exigiu um modelo de dados único por trás dos dois, uma interface rápida o bastante para se trabalhar dentro dela o dia inteiro, e estados que continuam legíveis conforme o trabalho anda.",
+      "delivered": {
+        "d1": "Gestão de tarefas e gestão de projetos como um único produto.",
+        "d2": "Front-end em React e Vite, com Framer Motion conduzindo o movimento da interface.",
+        "d3": "Supabase como camada de dados, autenticação e API.",
+        "d4": "Arquitetura, front-end, back-end, refinamento e publicação — desenvolvido por mim, sozinho, 100%."
+      },
+      "result": ""
+    },
+    "blumenns": {
+      "name": "Blumenns",
+      "type": "E-commerce com painel administrativo",
+      "summary": "Loja de semijoias — prata 925 com banho de ouro 18k — com painel administrativo autenticado para gestão do catálogo.",
+      "shotAlt": "A página inicial da Blumenns, apresentando a coleção de semijoias.",
+      "context": "A Blumenns vende semijoias: prata 925 com banho de ouro 18k. O projeto são dois produtos em um — uma loja onde as peças são apresentadas, e um painel administrativo autenticado onde o catálogo é mantido de dentro da própria loja, em vez de passar por um desenvolvedor.",
+      "challenge": "Uma pessoa só precisava construir e proteger as duas metades: uma vitrine que fizesse justiça às peças, e uma área administrativa atrás de autenticação onde os produtos são criados e editados sem tocar em código.",
+      "delivered": {
+        "d1": "Vitrine para o catálogo de prata 925 com banho de ouro 18k.",
+        "d2": "Painel administrativo autenticado para gestão de produtos.",
+        "d3": "React e Vite tanto na loja quanto no painel.",
+        "d4": "Arquitetura, desenvolvimento, refinamento e entrega — desenvolvido por mim, sozinho, 100%."
+      },
+      "result": ""
+    }
+  },
+  "sheet": {
+    "backToSheet": "Voltar para a prancha 01",
+    "visitLive": "Abrir o site no ar",
+    "stationOverview": "Visão geral",
+    "stationContext": "Contexto",
+    "stationStack": "Stack",
+    "stationDelivered": "Entrega",
+    "stationResult": "Resultado",
+    "gutterContext": "Notas",
+    "headingContext": "O contexto",
+    "headingChallenge": "O desafio",
+    "gutterStack": "Relação",
+    "headingStack": "Sobre o que foi construído",
+    "stackCaption": "Relação de componentes",
+    "component": "Componente",
+    "role": "Função",
+    "gutterDelivered": "Escopo",
+    "headingDelivered": "O que foi entregue",
+    "gutterResult": "Situação",
+    "headingResult": "Resultado",
+    "pendingTag": "Rev pendente",
+    "pendingTitle": "Resultado ainda não registrado",
+    "pendingBody": "Nenhum resultado foi informado para este projeto, então nada é afirmado aqui e nada foi inventado. Esta nota some no momento em que existir um resultado real.",
+    "previousSheet": "Prancha anterior",
+    "nextSheet": "Próxima prancha",
+    "otherSheets": "Outras pranchas"
+  },
+  "contact": {
+    "gutter": "Emitido para",
+    "heading": "Me conte o que sustenta a sua operação hoje.",
+    "lead": "Mande um resumo curto do sistema que você precisa: o que ele tem que fazer, quem trabalha dentro dele, e o que ele precisa substituir. Eu leio e respondo cada mensagem pessoalmente.",
+    "cta": "Falar com o Ryan",
+    "status": "Disponível para novos projetos",
+    "note": "Pode escrever em português, inglês ou espanhol — como preferir.",
+    "whatsappMessage": "Olá Ryan, vi o seu portfólio e gostaria de conversar sobre um sistema."
+  },
+  "titleBlock": {
+    "drawnBy": "Desenvolvido por",
+    "drawing": "Desenho",
+    "sheet": "Prancha",
+    "contact": "Contato",
+    "rev": "Rev {rev}",
+    "copyright": "© {year} {name}. Todos os direitos reservados."
+  },
+  "notFound": {
+    "tag": "Prancha não encontrada",
+    "heading": "Esta prancha não está no conjunto.",
+    "body": "O endereço que você seguiu não corresponde a nenhuma prancha deste desenho. A prancha 01 tem o conjunto inteiro.",
+    "cta": "Voltar para a prancha 01"
+  }
+}

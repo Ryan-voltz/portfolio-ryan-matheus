@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "titleSuffix": "Custom CRM, ERP & E-commerce Systems",
+    "description": "Full-stack developer building custom business systems — CRM, ERP, e-commerce and compliance platforms. Three of them designed, built and handed over end to end, alone."
+  },
+  "nav": {
+    "home": "Ryan Matheus — home",
+    "sections": "Sections",
+    "language": "Language",
+    "start": "Start",
+    "about": "About",
+    "work": "Work",
+    "projects": "Projects",
+    "contact": "Contact",
+    "write": "Write"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "stack": "Stack",
+    "drawnBy": "Drawn by",
+    "soleAuthor": "Ryan Matheus — 100%",
+    "openSheet": "Open sheet {sheet}",
+    "detail": "Detail",
+    "item": "Item",
+    "project": "Project",
+    "type": "Type",
+    "experience": "Experience",
+    "systems": "Systems",
+    "scale": "Scale",
+    "sheet": "Sheet",
+    "rev": "Rev",
+    "status": "Status",
+    "stackRole": {
+      "react": "Interface layer",
+      "vite": "Build tooling and dev server",
+      "supabase": "Database, authentication and API",
+      "framermotion": "Interface motion"
+    }
+  },
+  "home": {
+    "lead": "I build the systems companies run on — CRM, ERP, e-commerce and compliance platforms — and I own every stage of the delivery myself: requirements and architecture, front end and back end, hardening, and the handoff.",
+    "stage1": "Architecture",
+    "stage2": "Build",
+    "stage3": "Hardening",
+    "stage4": "Handoff",
+    "span": "Ryan Matheus — 100%",
+    "cta": "Write to Ryan",
+    "ctaSecondary": "See the work",
+    "indexLabel": "Details on this set",
+    "meta": {
+      "experience": "3+ years",
+      "systems": "08 live",
+      "status": "Available for new projects"
+    },
+    "about": {
+      "gutter": "Notes",
+      "heading": "One person, the whole delivery",
+      "lead": "Where I started, what I build, and how a system gets from a requirement to a handoff.",
+      "n1": "I build custom business systems — CRM, ERP, e-commerce, and compliance and financial platforms — for companies in retail, education and professional services.",
+      "n2": "I started as an IT assistant at a logistics and customs-brokerage company, working on their internal systems. That is where I learned SQL, PHP, Firebird and Laravel.",
+      "n3": "I founded Voltz Agency, where I personally develop the company's flagship systems end to end. I also take on select freelance projects directly.",
+      "n4": "I own the full delivery process: requirements and system architecture, AI-accelerated development across front end and back end, and hands-on refinement — security, edge cases and finalization — before every handoff. I hold a certification in prompt engineering.",
+      "n5": "I built my own automated auditing tool to test delivered systems end to end.",
+      "portraitTag": "To be supplied",
+      "portraitNote": "This detail has not been issued yet.",
+      "portraitCaption": "Detail D — portrait"
+    },
+    "work": {
+      "gutter": "Details",
+      "heading": "Three systems, built alone",
+      "lead": "Each of these I developed end to end by myself — architecture, front end, back end, hardening and handoff. Each one has its own sheet.",
+      "seeSheet": "Open sheet"
+    },
+    "projects": {
+      "gutter": "Schedule",
+      "heading": "Other projects",
+      "lead": "{count} further systems built for companies in retail, education and auto parts. Every row opens the live site."
+    }
+  },
+  "projects": {
+    "seu-puto-store": {
+      "name": "Seu Puto Store",
+      "type": "Fashion and streetwear e-commerce"
+    },
+    "overall-cla": {
+      "name": "Overall Clã",
+      "type": "Supplements e-commerce with its own admin and CRM area"
+    },
+    "fipec": {
+      "name": "Fipec",
+      "type": "Auto-parts e-commerce with WhatsApp quoting"
+    },
+    "g7-comercio": {
+      "name": "G7 Comércio",
+      "type": "Pedagogical projects and teacher-training platform (BNCC)"
+    },
+    "grupo-educare": {
+      "name": "Grupo Educare",
+      "type": "Textbook distributor for school networks across Brazil"
+    }
+  },
+  "work": {
+    "volare": {
+      "name": "Volare Company",
+      "type": "Public procurement compliance platform",
+      "summary": "Advisory for Brazilian public tenders: automated search across the PNCP, continuous monitoring of tender notices, and compliance with Law 14.133/2021.",
+      "shotAlt": "The Volare Company home page, presenting its public tender advisory service.",
+      "context": "Volare Company advises businesses that sell to the Brazilian public sector. Every opportunity begins as a tender notice published on the PNCP — the federal government's public procurement portal — and each one has to be read against Law 14.133/2021, the Brazilian public procurement act, before a company commits to bidding.",
+      "challenge": "Finding the relevant notices on the PNCP, and keeping track of the ones already in play, was work done by hand, notice by notice. The platform had to automate that search, keep watching the notices as they change, and hold the requirements of Law 14.133/2021 alongside each one.",
+      "delivered": {
+        "d1": "Automated search across the PNCP, the Brazilian government's public procurement portal.",
+        "d2": "Continuous monitoring of tender notices.",
+        "d3": "Compliance with Law 14.133/2021 built into the way notices are handled.",
+        "d4": "Architecture, front end, back end, hardening and handoff — developed by me alone, 100%."
+      },
+      "result": "The platform launched recently and is still in early use, so there are no result figures to report — and none have been invented here. What it changes today is qualitative: a search that used to be run by hand now runs automatically, and notices are watched continuously instead of being checked one at a time."
+    },
+    "voltz-hub": {
+      "name": "Voltz Hub",
+      "type": "Task and project management SaaS",
+      "summary": "Voltz Agency's own product for running tasks and projects — designed, built and released by me as the agency's founder.",
+      "shotAlt": "The Voltz Hub home page, presenting its task and project management product.",
+      "context": "Voltz Hub is Voltz Agency's own product. I founded Voltz, and I developed Voltz Hub end to end, alone — which means the requirements came from inside the company rather than from a client brief.",
+      "challenge": "Task management and project management had to work as one product, not as two sets of screens that happen to share a login. That meant a single data model behind both, an interface fast enough to work inside all day, and state that stays legible as work moves.",
+      "delivered": {
+        "d1": "Task management and project management as one product.",
+        "d2": "React and Vite front end, with Framer Motion carrying the interface motion.",
+        "d3": "Supabase as the data, authentication and API layer.",
+        "d4": "Architecture, front end, back end, hardening and release — developed by me alone, 100%."
+      },
+      "result": ""
+    },
+    "blumenns": {
+      "name": "Blumenns",
+      "type": "E-commerce with an admin panel",
+      "summary": "A semi-jewelry store — 925 silver and 18k gold plating — with an authenticated admin panel for managing the catalogue.",
+      "shotAlt": "The Blumenns home page, presenting its semi-jewelry collection.",
+      "context": "Blumenns sells semi-jewelry: 925 sterling silver with 18k gold plating. The build is two products in one — a storefront where the pieces are presented, and an authenticated admin panel where the catalogue is maintained from inside the store instead of through a developer.",
+      "challenge": "One person had to build and secure both halves: a storefront that does the pieces justice, and an admin area behind authentication where products are created and edited without touching code.",
+      "delivered": {
+        "d1": "Storefront for the 925 silver and 18k gold-plated catalogue.",
+        "d2": "Authenticated admin panel for product management.",
+        "d3": "React and Vite across both the storefront and the admin panel.",
+        "d4": "Architecture, build, hardening and handoff — developed by me alone, 100%."
+      },
+      "result": ""
+    }
+  },
+  "sheet": {
+    "backToSheet": "Back to sheet 01",
+    "visitLive": "Open the live site",
+    "stationOverview": "Overview",
+    "stationContext": "Context",
+    "stationStack": "Stack",
+    "stationDelivered": "Delivered",
+    "stationResult": "Result",
+    "gutterContext": "Notes",
+    "headingContext": "The context",
+    "headingChallenge": "The challenge",
+    "gutterStack": "Schedule",
+    "headingStack": "What it is built on",
+    "stackCaption": "Schedule of components",
+    "component": "Component",
+    "role": "Role",
+    "gutterDelivered": "Scope",
+    "headingDelivered": "What was delivered",
+    "gutterResult": "Status",
+    "headingResult": "Result",
+    "pendingTag": "Rev pending",
+    "pendingTitle": "Result not recorded yet",
+    "pendingBody": "No outcome has been supplied for this project, so none is stated here and none has been invented. This note is replaced the moment a real result exists.",
+    "previousSheet": "Previous sheet",
+    "nextSheet": "Next sheet",
+    "otherSheets": "Other sheets"
+  },
+  "contact": {
+    "gutter": "Issued for",
+    "heading": "Tell me what your company runs on.",
+    "lead": "Send a short note about the system you need: what it has to do, who works inside it, and what it has to replace. I read and answer every message myself.",
+    "cta": "Write to Ryan",
+    "status": "Available for new projects",
+    "note": "Write in English, Portuguese or Spanish — whichever you prefer.",
+    "whatsappMessage": "Hi Ryan, I saw your portfolio and I would like to talk about a system."
+  },
+  "titleBlock": {
+    "drawnBy": "Drawn by",
+    "drawing": "Drawing",
+    "sheet": "Sheet",
+    "contact": "Contact",
+    "rev": "Rev {rev}",
+    "copyright": "© {year} {name}. All rights reserved."
+  },
+  "notFound": {
+    "tag": "Sheet not found",
+    "heading": "This sheet is not in the set.",
+    "body": "The address you followed does not match any sheet in this drawing. Sheet 01 has the whole set.",
+    "cta": "Back to sheet 01"
+  }
+}

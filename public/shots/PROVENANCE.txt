@@ -1,0 +1,18 @@
+Origin of every raster in this directory:
+
+Automated Chromium screenshots of the live production sites listed below,
+captured at 1440x900 @2x and downscaled to 1600px wide WebP.
+They are photographs of real, publicly reachable pages built by Ryan Matheus.
+No image here is AI-generated, stock, or composited.
+
+Capture script: scripts/capture-sites.mjs
+Captured: 2026-09-02
+
+volare.webp  <-  https://volarecompany.com.br/
+voltz-hub.webp  <-  https://voltzhub.com.br/
+blumenns.webp  <-  https://blumenns.com/
+seu-puto-store.webp  <-  https://seuputostore.com.br/
+overall-cla.webp  <-  https://overalclasuplementos.com.br/
+fipec.webp  <-  https://fipec.com.br/
+g7-comercio.webp  <-  https://g7comercio.com.br/
+grupo-educare.webp  <-  https://editoraeducare.com.br/

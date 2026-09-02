@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "titleSuffix": "Sistemas a medida — CRM, ERP y E-commerce",
+    "description": "Desarrollador full-stack que construye sistemas de gestión a medida — CRM, ERP, e-commerce y plataformas de compliance. Tres de ellos diseñados, desarrollados y entregados de principio a fin, en solitario."
+  },
+  "nav": {
+    "home": "Ryan Matheus — inicio",
+    "sections": "Secciones",
+    "language": "Idioma",
+    "start": "Inicio",
+    "about": "Sobre mí",
+    "work": "Casos",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "write": "Escribir"
+  },
+  "common": {
+    "skipToContent": "Ir al contenido",
+    "stack": "Stack",
+    "drawnBy": "Desarrollado por",
+    "soleAuthor": "Ryan Matheus — 100%",
+    "openSheet": "Abrir lámina {sheet}",
+    "detail": "Detalle",
+    "item": "Ítem",
+    "project": "Proyecto",
+    "type": "Tipo",
+    "experience": "Experiencia",
+    "systems": "Sistemas",
+    "scale": "Escala",
+    "sheet": "Lámina",
+    "rev": "Rev",
+    "status": "Estado",
+    "stackRole": {
+      "react": "Capa de interfaz",
+      "vite": "Build y servidor de desarrollo",
+      "supabase": "Base de datos, autenticación y API",
+      "framermotion": "Movimiento de la interfaz"
+    }
+  },
+  "home": {
+    "lead": "Construyo los sistemas sobre los que funcionan las empresas — CRM, ERP, e-commerce y plataformas de compliance — y conduzco personalmente todas las etapas de la entrega: requisitos y arquitectura, front-end y back-end, refinamiento y entrega final.",
+    "stage1": "Arquitectura",
+    "stage2": "Desarrollo",
+    "stage3": "Refinamiento",
+    "stage4": "Entrega",
+    "span": "Ryan Matheus — 100%",
+    "cta": "Escribir a Ryan",
+    "ctaSecondary": "Ver los casos",
+    "indexLabel": "Detalles de este conjunto",
+    "meta": {
+      "experience": "3+ años",
+      "systems": "08 en línea",
+      "status": "Disponible para nuevos proyectos"
+    },
+    "about": {
+      "gutter": "Notas",
+      "heading": "Una sola persona, la entrega completa",
+      "lead": "De dónde vengo, qué construyo, y cómo un sistema pasa de un requisito a una entrega.",
+      "n1": "Construyo sistemas de gestión a medida — CRM, ERP, e-commerce y plataformas de compliance y financieras — para empresas de retail, educación y servicios profesionales.",
+      "n2": "Empecé como asistente de TI en una empresa de logística y despacho aduanero, trabajando en sus sistemas internos. Ahí aprendí SQL, PHP, Firebird y Laravel.",
+      "n3": "Fundé Voltz Agency, donde desarrollo personalmente los sistemas principales de la empresa, de principio a fin. También acepto proyectos freelance seleccionados, de forma directa.",
+      "n4": "Conduzco todo el proceso de entrega: relevamiento de requisitos y arquitectura del sistema, desarrollo acelerado por IA en front-end y back-end, y refinamiento manual — seguridad, casos límite y finalización — antes de cada entrega. Tengo una certificación en ingeniería de prompts.",
+      "n5": "Construí mi propia herramienta automatizada de auditoría para probar los sistemas entregados de principio a fin.",
+      "portraitTag": "Por suministrar",
+      "portraitNote": "Este detalle aún no ha sido emitido.",
+      "portraitCaption": "Detalle D — retrato"
+    },
+    "work": {
+      "gutter": "Detalles",
+      "heading": "Tres sistemas, hechos en solitario",
+      "lead": "Cada uno de estos lo desarrollé de principio a fin, yo solo — arquitectura, front-end, back-end, refinamiento y entrega. Cada uno tiene su propia lámina.",
+      "seeSheet": "Abrir lámina"
+    },
+    "projects": {
+      "gutter": "Listado",
+      "heading": "Otros proyectos",
+      "lead": "Otros {count} sistemas construidos para empresas de retail, educación y autopartes. Cada fila abre el sitio en línea."
+    }
+  },
+  "projects": {
+    "seu-puto-store": {
+      "name": "Seu Puto Store",
+      "type": "E-commerce de moda y streetwear"
+    },
+    "overall-cla": {
+      "name": "Overall Clã",
+      "type": "E-commerce de suplementos con área administrativa y CRM propios"
+    },
+    "fipec": {
+      "name": "Fipec",
+      "type": "E-commerce de autopartes con cotización por WhatsApp"
+    },
+    "g7-comercio": {
+      "name": "G7 Comércio",
+      "type": "Plataforma de proyectos pedagógicos y formación docente (BNCC)"
+    },
+    "grupo-educare": {
+      "name": "Grupo Educare",
+      "type": "Distribuidora de libros de texto para redes escolares en todo Brasil"
+    }
+  },
+  "work": {
+    "volare": {
+      "name": "Volare Company",
+      "type": "Plataforma de compliance en licitaciones públicas",
+      "summary": "Asesoría en licitaciones públicas: búsqueda automatizada en el PNCP, monitoreo continuo de convocatorias y cumplimiento de la Ley 14.133/2021.",
+      "shotAlt": "La página de inicio de Volare Company, presentando su servicio de asesoría en licitaciones públicas.",
+      "context": "Volare Company asesora a empresas que venden al sector público brasileño. Cada oportunidad empieza como una convocatoria publicada en el PNCP — el portal de compras del gobierno federal de Brasil — y cada una debe leerse a la luz de la Ley 14.133/2021, la ley brasileña de licitaciones y contratos, antes de que una empresa se comprometa a competir.",
+      "challenge": "Encontrar las convocatorias relevantes en el PNCP, y seguir las que ya estaban en juego, era trabajo hecho a mano, convocatoria por convocatoria. La plataforma tenía que automatizar esa búsqueda, seguir vigilando las convocatorias a medida que cambian, y mantener los requisitos de la Ley 14.133/2021 junto a cada una.",
+      "delivered": {
+        "d1": "Búsqueda automatizada en el PNCP, el portal de compras públicas del gobierno brasileño.",
+        "d2": "Monitoreo continuo de convocatorias.",
+        "d3": "Cumplimiento de la Ley 14.133/2021 incorporado a la forma en que se tratan las convocatorias.",
+        "d4": "Arquitectura, front-end, back-end, refinamiento y entrega — desarrollado por mí, en solitario, 100%."
+      },
+      "result": "La plataforma se lanzó hace poco y sigue en uso inicial, así que no hay cifras de resultado que informar — y ninguna se ha inventado aquí. Lo que cambia hoy es cualitativo: una búsqueda que antes se hacía a mano ahora corre automáticamente, y las convocatorias se vigilan de forma continua en lugar de revisarse una por una."
+    },
+    "voltz-hub": {
+      "name": "Voltz Hub",
+      "type": "SaaS de gestión de tareas y proyectos",
+      "summary": "El producto interno de la propia Voltz Agency para gestionar tareas y proyectos — diseñado, desarrollado y publicado por mí, como fundador de la agencia.",
+      "shotAlt": "La página de inicio de Voltz Hub, presentando su producto de gestión de tareas y proyectos.",
+      "context": "Voltz Hub es el producto de la propia Voltz Agency. Fundé Voltz y desarrollé Voltz Hub de principio a fin, en solitario — lo que significa que los requisitos vinieron de dentro de la empresa, no de un briefing de cliente.",
+      "challenge": "La gestión de tareas y la gestión de proyectos tenían que funcionar como un solo producto, no como dos conjuntos de pantallas que apenas comparten un login. Eso exigió un único modelo de datos detrás de ambas, una interfaz lo bastante rápida para trabajar dentro de ella todo el día, y estados que siguen siendo legibles a medida que avanza el trabajo.",
+      "delivered": {
+        "d1": "Gestión de tareas y gestión de proyectos como un único producto.",
+        "d2": "Front-end en React y Vite, con Framer Motion llevando el movimiento de la interfaz.",
+        "d3": "Supabase como capa de datos, autenticación y API.",
+        "d4": "Arquitectura, front-end, back-end, refinamiento y publicación — desarrollado por mí, en solitario, 100%."
+      },
+      "result": ""
+    },
+    "blumenns": {
+      "name": "Blumenns",
+      "type": "E-commerce con panel administrativo",
+      "summary": "Una tienda de bisutería fina — plata 925 con baño de oro 18k — con panel administrativo autenticado para gestionar el catálogo.",
+      "shotAlt": "La página de inicio de Blumenns, presentando su colección de bisutería fina.",
+      "context": "Blumenns vende bisutería fina: plata 925 con baño de oro 18k. El proyecto son dos productos en uno — una tienda donde se presentan las piezas, y un panel administrativo autenticado donde el catálogo se mantiene desde dentro de la propia tienda, en vez de pasar por un desarrollador.",
+      "challenge": "Una sola persona tenía que construir y asegurar las dos mitades: una tienda que hiciera justicia a las piezas, y un área administrativa tras autenticación donde los productos se crean y se editan sin tocar código.",
+      "delivered": {
+        "d1": "Tienda para el catálogo de plata 925 con baño de oro 18k.",
+        "d2": "Panel administrativo autenticado para la gestión de productos.",
+        "d3": "React y Vite tanto en la tienda como en el panel.",
+        "d4": "Arquitectura, desarrollo, refinamiento y entrega — desarrollado por mí, en solitario, 100%."
+      },
+      "result": ""
+    }
+  },
+  "sheet": {
+    "backToSheet": "Volver a la lámina 01",
+    "visitLive": "Abrir el sitio en línea",
+    "stationOverview": "Resumen",
+    "stationContext": "Contexto",
+    "stationStack": "Stack",
+    "stationDelivered": "Entrega",
+    "stationResult": "Resultado",
+    "gutterContext": "Notas",
+    "headingContext": "El contexto",
+    "headingChallenge": "El desafío",
+    "gutterStack": "Listado",
+    "headingStack": "Sobre qué está construido",
+    "stackCaption": "Listado de componentes",
+    "component": "Componente",
+    "role": "Función",
+    "gutterDelivered": "Alcance",
+    "headingDelivered": "Qué se entregó",
+    "gutterResult": "Situación",
+    "headingResult": "Resultado",
+    "pendingTag": "Rev pendiente",
+    "pendingTitle": "Resultado aún no registrado",
+    "pendingBody": "No se ha proporcionado ningún resultado para este proyecto, así que aquí no se afirma ninguno y no se ha inventado nada. Esta nota desaparece en cuanto exista un resultado real.",
+    "previousSheet": "Lámina anterior",
+    "nextSheet": "Lámina siguiente",
+    "otherSheets": "Otras láminas"
+  },
+  "contact": {
+    "gutter": "Emitido para",
+    "heading": "Cuéntame sobre qué funciona tu empresa hoy.",
+    "lead": "Envía un resumen corto del sistema que necesitas: qué tiene que hacer, quién trabaja dentro de él, y qué tiene que sustituir. Leo y respondo cada mensaje personalmente.",
+    "cta": "Escribir a Ryan",
+    "status": "Disponible para nuevos proyectos",
+    "note": "Escribe en español, inglés o portugués — como prefieras.",
+    "whatsappMessage": "Hola Ryan, vi tu portafolio y me gustaría hablar sobre un sistema."
+  },
+  "titleBlock": {
+    "drawnBy": "Desarrollado por",
+    "drawing": "Dibujo",
+    "sheet": "Lámina",
+    "contact": "Contacto",
+    "rev": "Rev {rev}",
+    "copyright": "© {year} {name}. Todos los derechos reservados."
+  },
+  "notFound": {
+    "tag": "Lámina no encontrada",
+    "heading": "Esta lámina no está en el conjunto.",
+    "body": "La dirección que seguiste no corresponde a ninguna lámina de este dibujo. La lámina 01 tiene el conjunto completo.",
+    "cta": "Volver a la lámina 01"
+  }
+}

@@ -1,0 +1,813 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   GENERAL ARRANGEMENT
+   The page is a drawing sheet. Everything here is line, label and field:
+   hairline rules, dimension chains, callout bubbles, a title block.
+   One accent — drafting redline — carries revision, state and action.
+   ========================================================================== */
+
+@theme {
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, 'SFMono-Regular', monospace;
+
+  --color-sheet: var(--sheet);
+  --color-field: var(--field);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-rule: var(--rule);
+  --color-rule-strong: var(--rule-strong);
+  --color-red: var(--red);
+  --color-red-ink: var(--red-ink);
+
+  --text-label: 0.6875rem;
+  --text-label--line-height: 1.1;
+  --text-label--letter-spacing: 0.14em;
+}
+
+:root {
+  color-scheme: light;
+
+  /* Drawing sheet under office light. */
+  --sheet: #eff1f2;
+  --field: #e4e7e9;
+  --ink: #111518;
+  --ink-2: #4e585f;
+  --ink-3: #5f6c73;
+  --rule: #c3cace;
+  --rule-strong: #7c888e;
+  --red: #c8271a;
+  --red-ink: #a8200f; /* redline text on the field tint */
+  --grid: rgba(17, 21, 24, 0.055);
+  --plate-ink: #fbfcfc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+
+    /* Drafting film on a light table, after hours. */
+    --sheet: #0f1315;
+    --field: #171c1f;
+    --ink: #e8ecee;
+    --ink-2: #a5b0b6;
+    --ink-3: #79868d;
+    --rule: #2c3438;
+    --rule-strong: #5a666c;
+    --red: #ff5340;
+    --red-ink: #ff7361;
+    --grid: rgba(232, 236, 238, 0.05);
+    --plate-ink: #12100f;
+  }
+}
+
+@layer base {
+
+* {
+  min-width: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Station rail + sticky header clearance for in-page anchors. */
+  scroll-padding-top: 6.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--sheet);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  caret-color: var(--red);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--red) 26%, transparent);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px dashed var(--red);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Browser chrome themed from the palette, not left on defaults. */
+* {
+  scrollbar-color: var(--rule-strong) transparent;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 11px;
+  height: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--field);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule-strong);
+  border: 3px solid var(--field);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-3);
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.28em;
+}
+
+}
+
+@layer components {
+
+/* --------------------------------------------------------------------------
+   Lettering
+   -------------------------------------------------------------------------- */
+
+.u-display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-stretch: 92%;
+  letter-spacing: -0.032em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.u-h2 {
+  font-size: clamp(1.65rem, 1.1rem + 2.4vw, 2.6rem);
+  font-weight: 600;
+  font-stretch: 94%;
+  letter-spacing: -0.022em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+.u-h3 {
+  font-size: clamp(1.15rem, 0.95rem + 0.9vw, 1.45rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.u-lead {
+  font-size: clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.u-body {
+  max-width: 68ch;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+/* Single-stroke gothic lettering: the drawing's labels, dimensions and codes. */
+.u-label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-stretch: 88%;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-3);
+}
+
+/* The sheet's lettering for names and actions — nav, field labels, controls.
+   A drawing letters these in the same gothic as its headings, not in a
+   typewriter face; `.u-label` stays for dimensions, codes, status and captions. */
+.u-tag {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-stretch: 92%;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--ink-3);
+}
+
+.u-tag-ink {
+  color: var(--ink);
+}
+
+.u-label-ink {
+  color: var(--ink);
+}
+.u-label-red {
+  color: var(--red-ink);
+}
+
+.u-num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-stretch: 88%;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------------------
+   Sheet, frame and field
+   -------------------------------------------------------------------------- */
+
+.sheet {
+  position: relative;
+  margin-inline: auto;
+  width: 100%;
+  max-width: 96rem;
+  padding-inline: clamp(0.75rem, 3vw, 2.25rem);
+}
+
+/* The filing margin. A plotted sheet keeps a wider margin down its bound edge;
+   here that margin is where the station rail lives, so content never collides
+   with it. Below 1280px the rail is hidden and the margin closes. */
+@media (min-width: 80rem) {
+  .sheet {
+    padding-inline-start: 11rem;
+  }
+}
+
+/* The drawing border: a heavier outer line with a hairline inside it. */
+.sheet-frame {
+  position: fixed;
+  inset: clamp(0.5rem, 1.4vw, 1rem);
+  z-index: 60;
+  pointer-events: none;
+  border: 1px solid var(--rule-strong);
+}
+
+.sheet-frame::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--rule);
+}
+
+/* Corner ticks — the registration marks of a plotted sheet. */
+.sheet-frame span {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 0 solid var(--red);
+  opacity: 0.85;
+}
+.sheet-frame span:nth-child(1) {
+  top: -1px;
+  left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.sheet-frame span:nth-child(2) {
+  top: -1px;
+  right: -1px;
+  border-top-width: 2px;
+  border-right-width: 2px;
+}
+.sheet-frame span:nth-child(3) {
+  bottom: -1px;
+  left: -1px;
+  border-bottom-width: 2px;
+  border-left-width: 2px;
+}
+.sheet-frame span:nth-child(4) {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+@media (max-width: 47.999rem) {
+  .sheet-frame {
+    display: none;
+  }
+}
+
+/* The bound edge of the sheet, running the full height of every screen so the
+   drawing does not stop being a drawing between fields. */
+.margin-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 1px;
+  background: var(--rule);
+  pointer-events: none;
+  left: max(9.25rem, calc((100vw - 96rem) / 2 + 9.25rem));
+  display: none;
+}
+
+@media (min-width: 80rem) {
+  .margin-line {
+    display: block;
+  }
+}
+
+/* The construction grid every element snaps to, shown only where a drawing
+   field belongs: the hero and the issue block. */
+.field-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  background-position: center;
+  mask-image: radial-gradient(120% 100% at 50% 30%, #000 35%, transparent 100%);
+}
+
+.hatch {
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--grid) 0,
+    var(--grid) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+
+/* --------------------------------------------------------------------------
+   Rules
+   -------------------------------------------------------------------------- */
+
+.rule {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 0;
+}
+
+.rule-strong {
+  border: 0;
+  border-top: 1px solid var(--rule-strong);
+  margin: 0;
+}
+
+/* Rules draw themselves in, left to right. Content never depends on this. */
+.draws {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--draw-delay, 0ms);
+}
+[data-drawn='true'] .draws,
+.draws[data-drawn='true'] {
+  transform: scaleX(1);
+}
+
+/* Labels and marks arrive after the rule they sit on. */
+/* Labels and marks settle after the rule they sit on. They never fade in:
+   text on this page is readable at first paint, with or without JavaScript,
+   and only its position is animated. */
+.marks {
+  transform: translateY(5px);
+  transition: transform 560ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--draw-delay, 0ms) + 240ms);
+}
+[data-drawn='true'] .marks,
+.marks[data-drawn='true'] {
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .draws,
+  .marks {
+    transform: none !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Dimension chain — the signature device
+   -------------------------------------------------------------------------- */
+
+.dim {
+  --tick: 9px;
+  position: relative;
+}
+
+/* One measured span: extension lines at both ends, arrowheads inside. */
+.dim-span {
+  position: relative;
+  border-top: 1px solid var(--rule-strong);
+}
+
+.dim-span::before,
+.dim-span::after {
+  content: '';
+  position: absolute;
+  top: calc(var(--tick) * -1);
+  width: 1px;
+  height: calc(var(--tick) * 2);
+  background: var(--rule-strong);
+}
+.dim-span::before {
+  left: 0;
+}
+.dim-span::after {
+  right: 0;
+}
+
+/* The whole-delivery bracket beneath the chain, drawn in redline. */
+.dim-bracket {
+  position: relative;
+  border-top: 1.5px solid var(--red);
+}
+.dim-bracket::before,
+.dim-bracket::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 1.5px;
+  height: 11px;
+  background: var(--red);
+}
+.dim-bracket::before {
+  left: 0;
+}
+.dim-bracket::after {
+  right: 0;
+}
+
+/* Vertical variant for narrow screens. */
+.dim-span-v {
+  position: relative;
+  border-left: 1px solid var(--rule-strong);
+}
+.dim-span-v::before,
+.dim-span-v::after {
+  content: '';
+  position: absolute;
+  left: calc(var(--tick) * -1);
+  height: 1px;
+  width: calc(var(--tick) * 2);
+  background: var(--rule-strong);
+}
+.dim-span-v::before {
+  top: 0;
+}
+.dim-span-v::after {
+  bottom: 0;
+}
+
+.dim-bracket-v {
+  position: relative;
+  border-left: 1.5px solid var(--red);
+}
+.dim-bracket-v::before,
+.dim-bracket-v::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 11px;
+  height: 1.5px;
+  background: var(--red);
+}
+.dim-bracket-v::before {
+  top: 0;
+}
+.dim-bracket-v::after {
+  bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Callouts, mounts, plates
+   -------------------------------------------------------------------------- */
+
+/* A section callout: a circle split by a rule, letter over sheet number. */
+.callout {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  overflow: hidden;
+  flex: none;
+}
+
+.callout > * {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 50%;
+}
+
+.callout > :first-child {
+  border-bottom: 1px solid var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1;
+  padding-bottom: 0.1em;
+}
+
+.callout > :last-child {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  padding-top: 0.15em;
+}
+
+/* A detail mounted on the sheet: drawn frame plus registration ticks. */
+.mount {
+  position: relative;
+  border: 1px solid var(--rule-strong);
+  background: var(--field);
+}
+
+.mount::before,
+.mount::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 0 solid var(--red);
+  pointer-events: none;
+  z-index: 2;
+}
+.mount::before {
+  top: -1px;
+  left: -1px;
+  border-top-width: 2px;
+  border-left-width: 2px;
+}
+.mount::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom-width: 2px;
+  border-right-width: 2px;
+}
+
+.mount img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The one solid field on the page: the primary action. */
+.plate {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--red);
+  color: var(--plate-ink);
+  padding: 0.95rem 1.4rem;
+  border: 1.5px solid var(--red);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  transition:
+    background-color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 220ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.plate:hover {
+  background: transparent;
+  color: var(--red-ink);
+}
+
+.plate svg {
+  transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.plate:hover svg {
+  transform: translateX(4px);
+}
+
+/* An outlined control in the same grammar. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  border: 1px solid var(--rule-strong);
+  padding: 0.6rem 0.85rem;
+  color: var(--ink-2);
+  text-decoration: none;
+  transition:
+    border-color 200ms ease,
+    color 200ms ease,
+    background-color 200ms ease;
+}
+.chip:hover {
+  border-color: var(--red);
+  color: var(--ink);
+  background: color-mix(in oklab, var(--red) 7%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Redline — the revision mark, and the only place a gap is admitted
+   -------------------------------------------------------------------------- */
+
+.redline {
+  position: relative;
+  border: 1.5px dashed var(--red);
+  background: color-mix(in oklab, var(--red) 6%, transparent);
+  padding: 1.15rem 1.25rem 1.25rem;
+}
+
+/* The revision triangle a drawing carries beside an unresolved item. */
+.rev-tri {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 5.5px solid transparent;
+  border-right: 5.5px solid transparent;
+  border-bottom: 9.5px solid var(--red);
+  flex: none;
+}
+
+/* --------------------------------------------------------------------------
+   Schedule table (bill of materials)
+   -------------------------------------------------------------------------- */
+
+.schedule {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.schedule th {
+  text-align: left;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--rule-strong);
+  white-space: nowrap;
+}
+
+.schedule td {
+  padding: 0.9rem;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: middle;
+}
+
+.schedule tbody tr {
+  transition: background-color 200ms ease;
+}
+
+.schedule tbody tr:hover,
+.schedule tbody tr:focus-within {
+  background: color-mix(in oklab, var(--red) 5%, transparent);
+}
+
+/* --------------------------------------------------------------------------
+   Station rail
+   -------------------------------------------------------------------------- */
+
+.station {
+  display: grid;
+  grid-template-columns: 1.35rem 1fr;
+  align-items: center;
+  gap: 0.55rem;
+  padding-block: 0.4rem;
+  text-decoration: none;
+  color: var(--ink-3);
+  transition: color 200ms ease;
+}
+
+.station:hover {
+  color: var(--ink);
+}
+
+.station[aria-current='true'] {
+  color: var(--ink);
+}
+
+.station-mark {
+  position: relative;
+  height: 1px;
+  background: var(--rule-strong);
+  transition:
+    background-color 260ms ease,
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: left center;
+}
+
+.station[aria-current='true'] .station-mark {
+  background: var(--red);
+  transform: scaleX(1.45);
+}
+
+.station-name {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-stretch: 92%;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Title block
+   -------------------------------------------------------------------------- */
+
+.tb {
+  border: 1px solid var(--rule-strong);
+  display: grid;
+}
+
+.tb-cell {
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  padding: 0.7rem 0.9rem;
+  min-width: 0;
+}
+
+.tb-cell:first-child {
+  border-left: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Leader line — draws from a callout to the detail it points at
+   -------------------------------------------------------------------------- */
+
+.leader path {
+  stroke: var(--red);
+  stroke-width: 1.25;
+  fill: none;
+  stroke-dasharray: var(--len, 260);
+  stroke-dashoffset: calc(var(--len, 260) * 0.66);
+  transition: stroke-dashoffset 620ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.detail:hover .leader path,
+.detail:focus-within .leader path {
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .leader path {
+    transition: none;
+  }
+}
+
+.detail .mount img {
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.detail:hover .mount img,
+.detail:focus-within .mount img {
+  transform: scale(1.014);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail .mount img {
+    transition: none;
+    transform: none !important;
+  }
+}
+
+/* Underline that grows from the left on link hover. */
+.u-link {
+  position: relative;
+  text-decoration: none;
+  color: var(--ink);
+}
+.u-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.u-link:hover::after,
+.u-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.u-skip {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-160%);
+  background: var(--red);
+  color: var(--plate-ink);
+  padding: 0.6rem 1rem;
+  transition: transform 200ms ease;
+}
+.u-skip:focus-visible {
+  transform: none;
+}
+
+}

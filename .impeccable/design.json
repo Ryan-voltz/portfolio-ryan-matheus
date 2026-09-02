@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-02T00:00:00.000Z",
+  "title": "Design System: Ryan Matheus — General Arrangement",
+  "extensions": {
+    "colorMeta": {
+      "redline": {
+        "role": "primary",
+        "displayName": "Drafting Redline",
+        "canonical": "#c8271a",
+        "tonalRamp": ["#c8271a", "#a8200f", "#ff5340", "#ff7361"]
+      },
+      "sheet": {
+        "role": "neutral",
+        "displayName": "Vellum",
+        "canonical": "#eff1f2",
+        "tonalRamp": ["#eff1f2", "#e4e7e9", "#171c1f", "#0f1315"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Graphite",
+        "canonical": "#111518",
+        "tonalRamp": ["#111518", "#4e585f", "#5f6c73", "#7c888e", "#c3cace"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The sheet's subject: the name on sheet 01, the project name on a case sheet. One per page." },
+      "headline": { "displayName": "Headline", "purpose": "The pinned role line under the name. Capped at 38ch." },
+      "title": { "displayName": "Field heading", "purpose": "One per field, after the field's heavy rule." },
+      "subtitle": { "displayName": "Sub-heading", "purpose": "Headings inside a field; project names in a schedule row." },
+      "lead": { "displayName": "Lead", "purpose": "The sentence under a field heading. 62-64ch." },
+      "body": { "displayName": "Body", "purpose": "Notes, context, delivered items. Capped at 68ch." },
+      "tag": { "displayName": "Drawing lettering", "purpose": "Anything a person reads or clicks in caps: nav, margin labels, project types, secondary actions, chips, station names." },
+      "label": { "displayName": "Dimension lettering", "purpose": "Anything measured: title-block labels and values, station and sheet numbers, revisions, captions, schedule heads, domains, stack values, status." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "ease-draw", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "The only easing curve in the system. Every transition uses it." },
+      { "name": "duration-state", "value": "200ms", "purpose": "Hover and focus colour changes." },
+      { "name": "duration-mark", "value": "560ms", "purpose": "A label settling into place behind the rule it sits on." },
+      { "name": "duration-leader", "value": "620ms", "purpose": "A leader line completing from its two-thirds rest state." },
+      { "name": "duration-rule", "value": "900ms", "purpose": "A field rule drawing itself in from the left." }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ],
+    "surfaceGrid": {
+      "name": "field-grid",
+      "value": "2.5rem squares, 1px lines at ~5% ink, radial mask from 50% 30%",
+      "purpose": "The construction grid under the first viewport, the details field, the issue block and each case sheet's overview and result."
+    }
+  },
+  "components": [
+    {
+      "name": "Action Plate",
+      "kind": "button",
+      "refersTo": "plate",
+      "description": "The only filled field on any screen. It empties on hover rather than darkening.",
+      "html": "<a class=\"ds-plate\" href=\"#\">Write to Ryan <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.4\" stroke-linecap=\"square\"><path d=\"M3 12h17\"/><path d=\"M14 6l6 6-6 6\"/></svg></a>",
+      "css": ".ds-plate{display:inline-flex;align-items:center;gap:.9rem;background:#c8271a;color:#fbfcfc;padding:.95rem 1.4rem;border:1.5px solid #c8271a;border-radius:0;font-family:Archivo,sans-serif;font-weight:600;letter-spacing:-.01em;text-decoration:none;transition:background-color 220ms cubic-bezier(.16,1,.3,1),color 220ms cubic-bezier(.16,1,.3,1)}.ds-plate:hover{background:transparent;color:#a8200f}.ds-plate svg{transition:transform 260ms cubic-bezier(.16,1,.3,1)}.ds-plate:hover svg{transform:translateX(4px)}"
+    },
+    {
+      "name": "Cartouche",
+      "kind": "custom",
+      "refersTo": "cartouche-label",
+      "description": "The small title block that closes a drawing field: label/value rows, hatched label column, redline status row.",
+      "html": "<dl class=\"ds-cartouche\"><dt>Experience</dt><dd>3+ years</dd><dt>Sheet</dt><dd>01 / 04</dd><dt>Status</dt><dd class=\"on\"><i></i>Available for new projects</dd></dl>",
+      "css": ".ds-cartouche{display:grid;grid-template-columns:auto 1fr;border:1px solid #7c888e;background:#eff1f2;font-family:'Martian Mono',monospace;font-size:.6875rem;letter-spacing:.14em;font-variant-numeric:tabular-nums}.ds-cartouche dt{text-transform:uppercase;color:#5f6c73;border-right:1px solid #c3cace;border-top:1px solid #c3cace;padding:.5rem .75rem;background-image:repeating-linear-gradient(45deg,rgba(17,21,24,.055) 0,rgba(17,21,24,.055) 1px,transparent 1px,transparent 6px)}.ds-cartouche dd{border-top:1px solid #c3cace;padding:.5rem .75rem;margin:0;color:#111518;letter-spacing:.06em}.ds-cartouche dt:first-of-type,.ds-cartouche dd:first-of-type{border-top:0}.ds-cartouche dd.on{color:#a8200f;font-weight:500;display:flex;align-items:center;gap:.5rem}.ds-cartouche i{width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:9.5px solid #c8271a}"
+    },
+    {
+      "name": "Dimension Chain",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The signature device: four measured spans with an overall redline bracket carrying one name as its dimension value.",
+      "html": "<div class=\"ds-dim\"><div class=\"row\"><span class=\"span\">Architecture</span><span class=\"span\">Build</span><span class=\"span\">Hardening</span><span class=\"span\">Handoff</span></div><div class=\"bracket\"></div><p class=\"total\">Ryan Matheus — 100%</p></div>",
+      "css": ".ds-dim .row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.ds-dim .span{position:relative;border-top:1px solid #7c888e;padding-top:1rem;font-family:Archivo,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.13em;text-transform:uppercase;color:#111518}.ds-dim .span::before,.ds-dim .span::after{content:'';position:absolute;top:-9px;width:1px;height:18px;background:#7c888e}.ds-dim .span::before{left:0}.ds-dim .span::after{right:0}.ds-dim .bracket{position:relative;margin-top:2rem;border-top:1.5px solid #c8271a}.ds-dim .bracket::before,.ds-dim .bracket::after{content:'';position:absolute;top:0;width:1.5px;height:11px;background:#c8271a}.ds-dim .bracket::before{left:0}.ds-dim .bracket::after{right:0}.ds-dim .total{margin:1rem 0 0;font-family:'Martian Mono',monospace;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:#a8200f;font-weight:500}"
+    },
+    {
+      "name": "Mounted Detail",
+      "kind": "card",
+      "refersTo": "mount",
+      "description": "A screenshot mounted on the sheet: heavy-line frame, two redline registration ticks, caption rule beneath.",
+      "html": "<figure class=\"ds-mount\"><div class=\"frame\"><img alt=\"\" src=\"\"></div><figcaption><span></span>Detail A — volarecompany.com.br</figcaption></figure>",
+      "css": ".ds-mount{margin:0}.ds-mount .frame{position:relative;border:1px solid #7c888e;background:#e4e7e9}.ds-mount .frame::before,.ds-mount .frame::after{content:'';position:absolute;width:10px;height:10px;border:0 solid #c8271a;z-index:2}.ds-mount .frame::before{top:-1px;left:-1px;border-top-width:2px;border-left-width:2px}.ds-mount .frame::after{bottom:-1px;right:-1px;border-bottom-width:2px;border-right-width:2px}.ds-mount img{display:block;width:100%;height:auto}.ds-mount figcaption{display:flex;align-items:center;gap:.75rem;margin-top:.75rem;font-family:'Martian Mono',monospace;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:#5f6c73}.ds-mount figcaption span{width:1.5rem;height:1px;background:#c8271a;flex:none}"
+    },
+    {
+      "name": "Redline Note",
+      "kind": "custom",
+      "refersTo": "redline-note",
+      "description": "The only place the system admits a gap: a fact not yet supplied, marked the way an engineer marks a check print.",
+      "html": "<div class=\"ds-redline\" role=\"note\"><p class=\"tag\"><i></i>Rev pending</p><p class=\"title\">Result not recorded yet</p><p class=\"body\">No outcome has been supplied for this project, so none is stated here and none has been invented.</p></div>",
+      "css": ".ds-redline{border:1.5px dashed #c8271a;background:color-mix(in oklab,#c8271a 6%,transparent);padding:1.15rem 1.25rem 1.25rem}.ds-redline .tag{display:flex;align-items:center;gap:.5rem;margin:0;font-family:'Martian Mono',monospace;font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:#a8200f;font-weight:500}.ds-redline i{width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:9.5px solid #c8271a}.ds-redline .title{margin:.75rem 0 0;font-family:Archivo,sans-serif;font-weight:600;font-size:1.25rem;letter-spacing:-.015em;color:#111518}.ds-redline .body{margin:.5rem 0 0;color:#4e585f;font-family:Archivo,sans-serif;max-width:68ch}"
+    },
+    {
+      "name": "Section Callout",
+      "kind": "custom",
+      "refersTo": "callout",
+      "description": "The circle a drawing points at a detail with: letter over sheet number, bisected by a rule.",
+      "html": "<span class=\"ds-callout\"><span>A</span><span>02</span></span>",
+      "css": ".ds-callout{display:grid;place-items:center;width:3.25rem;height:3.25rem;border:1.5px solid #111518;border-radius:50%;overflow:hidden;flex:none}.ds-callout>*{display:grid;place-items:center;width:100%;height:50%}.ds-callout>:first-child{border-bottom:1px solid #111518;font-family:Archivo,sans-serif;font-weight:700;font-size:.95rem;line-height:1}.ds-callout>:last-child{font-family:'Martian Mono',monospace;font-size:.5625rem;letter-spacing:.08em;color:#5f6c73}"
+    },
+    {
+      "name": "Station Rail Item",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "The page's single vertical axis, fixed in the filing margin at >=1280px. Active state is a stretched mark first, a colour second.",
+      "html": "<a class=\"ds-station\" aria-current=\"true\" href=\"#\"><span class=\"num\">03</span><span class=\"grp\"><span class=\"mark\"></span><span class=\"name\">Work</span></span></a>",
+      "css": ".ds-station{display:grid;grid-template-columns:1.35rem 1fr;align-items:center;gap:.55rem;padding-block:.4rem;text-decoration:none;color:#5f6c73;transition:color 200ms cubic-bezier(.16,1,.3,1)}.ds-station .num{font-family:'Martian Mono',monospace;font-size:.625rem;font-variant-numeric:tabular-nums;opacity:.7}.ds-station .grp{display:grid;grid-template-columns:1.25rem auto;align-items:center;gap:.5rem}.ds-station .mark{height:1px;background:#7c888e;transform-origin:left center;transition:background-color 260ms,transform 420ms cubic-bezier(.16,1,.3,1)}.ds-station .name{font-family:Archivo,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}.ds-station[aria-current=\"true\"]{color:#111518}.ds-station[aria-current=\"true\"] .mark{background:#c8271a;transform:scaleX(1.45)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The General Arrangement Drawing",
+    "overview": "This is not a portfolio that shows work — it is the drawing of the work: the general-arrangement sheet an engineer produces between 'we need a system' and 'here is the system'. Every page is a plotted sheet, with a double border and registration ticks, a filing margin down the bound edge, hairline rules dividing the fields, section callouts pointing at mounted details, a schedule of parts, and a title block that closes it. The subject is a developer who architects, builds, hardens and hands over business systems alone, and the sheet is the artifact that claim naturally produces. Density is low and precision is high: nothing is decorated, everything is measured, labelled or ruled. Type is set at two extremes — a heading at drawing scale and lettering at 11px — exactly as a real sheet is lettered, and the one saturated field on any screen is the primary action. The rejected reference is the category default this world exists to refuse: a hero band over a grid of same-size project cards, with a gradient headline and a soft-shadowed card lift on hover.",
+    "keyCharacteristics": [
+      "Line, label and field — never fill, shadow or ornament.",
+      "One accent, drafting redline, reserved for revision, state and the single primary action.",
+      "Two lettering registers (drawing gothic and dimension mono) with a strict division of labour.",
+      "Every claim that can be measured is drawn as a dimension, not written as an adjective.",
+      "Sheets, not pages: home is sheet 01, each case sheet 02-04, numbered on every screen."
+    ],
+    "rules": [
+      { "name": "The One Pen Rule", "body": "Redline is the only saturated colour, and never used for emphasis, decoration or category. It appears where a drafting pen appears: a revision, an unresolved item, the current position, and the one thing the visitor is asked to do. If a second colour seems needed, the answer is a second mark, not a second hue.", "section": "colors" },
+      { "name": "The Cool Ground Rule", "body": "Both grounds are blue-grey neutrals. Warm paper, cream and ivory are prohibited: the world is film and vellum, and a warm ground reads as an editorial template rather than a plotted sheet.", "section": "colors" },
+      { "name": "The Two Registers Rule", "body": "Mono is for what a drawing sets in mono: dimensions, codes, item numbers, domains, revision and status. Everything a person reads or clicks is the gothic. Monospace used to make something look technical is the failure this rule prevents.", "section": "typography" },
+      { "name": "The Two Extremes Rule", "body": "The sheet is lettered at drawing scale or at 11px, with very little between. Resist inventing a mid-size heading to soften the jump; the jump is the drawing's rhythm.", "section": "typography" },
+      { "name": "The No-Shadow Rule", "body": "A drawing is ink on a flat sheet. Any box-shadow, bevel, emboss, glow or faux material is out of the world, including on hover. When an element needs to separate from the ground it takes a rule, a tone or a tick.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do carry state as a mark before a colour — a revision triangle, a stretched rail tick, an underline that scales in.",
+      "Do keep the filing margin empty of content at >=80rem; it belongs to the rail and the margin line.",
+      "Do give a new component a rule, a tick or a tone when it needs to separate.",
+      "Do put a fact that is not yet supplied into a redline note that names the gap, in every locale.",
+      "Do set anything a person reads or clicks in Archivo, and anything measured in Martian Mono.",
+      "Do open every field with one full-measure heavy rule and put its label in the margin at lg and above."
+    ],
+    "donts": [
+      "Don't add a shadow, bevel, glow, gradient or faux material, in any theme or state.",
+      "Don't introduce a second accent colour, or use redline for anything that is not revision, state or the primary action.",
+      "Don't stack a label above a heading at any breakpoint.",
+      "Don't set body copy, headings, navigation or buttons in the mono.",
+      "Don't use a warm or cream ground; the world is film and vellum.",
+      "Don't build a grid of same-size cards; the containers are mounts, cartouches, schedules and notes.",
+      "Don't gate text on a reveal animation — content is readable at first paint, with or without JavaScript.",
+      "Don't number a section unless the sequence carries information the reader needs."
+    ]
+  }
+}

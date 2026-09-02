@@ -1,0 +1,12 @@
+node_modules
+.next
+out
+.env*.local
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+.impeccable/live
+.impeccable/review
+.DS_Store
+.impeccable/questions
+.impeccable/mocks
