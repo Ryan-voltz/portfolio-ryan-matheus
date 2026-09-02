@@ -19,23 +19,23 @@
     "stack": "Stack",
     "drawnBy": "Drawn by",
     "soleAuthor": "Ryan Matheus — 100%",
-    "openSheet": "Open sheet {sheet}",
     "detail": "Detail",
     "item": "Item",
     "project": "Project",
     "type": "Type",
+    "industries": "Industries",
+    "languages": "Languages",
     "experience": "Experience",
     "systems": "Systems",
-    "scale": "Scale",
-    "sheet": "Sheet",
-    "rev": "Rev",
     "status": "Status",
     "stackRole": {
       "react": "Interface layer",
       "vite": "Build tooling and dev server",
       "supabase": "Database, authentication and API",
       "framermotion": "Interface motion"
-    }
+    },
+    "expand": "Open the {name} detail at full size",
+    "close": "Close"
   },
   "home": {
     "lead": "I build the systems companies run on — CRM, ERP, e-commerce and compliance platforms — and I own every stage of the delivery myself: requirements and architecture, front end and back end, hardening, and the handoff.",
@@ -50,7 +50,9 @@
     "meta": {
       "experience": "3+ years",
       "systems": "08 live",
-      "status": "Available for new projects"
+      "industries": "Retail · Education · Services",
+      "status": "Available for new projects",
+      "statusShort": "Available"
     },
     "about": {
       "gutter": "Notes",
@@ -69,7 +71,7 @@
       "gutter": "Details",
       "heading": "Three systems, built alone",
       "lead": "Each of these I developed end to end by myself — architecture, front end, back end, hardening and handoff. Each one has its own sheet.",
-      "seeSheet": "Open sheet"
+      "viewCase": "View the case"
     },
     "projects": {
       "gutter": "Schedule",
@@ -147,7 +149,7 @@
     }
   },
   "sheet": {
-    "backToSheet": "Back to sheet 01",
+    "backToSheet": "Back to the work",
     "visitLive": "Open the live site",
     "stationOverview": "Overview",
     "stationContext": "Context",
@@ -185,10 +187,10 @@
   "titleBlock": {
     "drawnBy": "Drawn by",
     "drawing": "Drawing",
-    "sheet": "Sheet",
     "contact": "Contact",
     "rev": "Rev {rev}",
-    "copyright": "© {year} {name}. All rights reserved."
+    "copyright": "© {year} {name}. All rights reserved.",
+    "status": "Status"
   },
   "notFound": {
     "tag": "Sheet not found",

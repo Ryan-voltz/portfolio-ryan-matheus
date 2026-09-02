@@ -19,23 +19,23 @@
     "stack": "Stack",
     "drawnBy": "Desarrollado por",
     "soleAuthor": "Ryan Matheus — 100%",
-    "openSheet": "Abrir lámina {sheet}",
     "detail": "Detalle",
     "item": "Ítem",
     "project": "Proyecto",
     "type": "Tipo",
+    "industries": "Sectores",
+    "languages": "Idiomas",
     "experience": "Experiencia",
     "systems": "Sistemas",
-    "scale": "Escala",
-    "sheet": "Lámina",
-    "rev": "Rev",
     "status": "Estado",
     "stackRole": {
       "react": "Capa de interfaz",
       "vite": "Build y servidor de desarrollo",
       "supabase": "Base de datos, autenticación y API",
       "framermotion": "Movimiento de la interfaz"
-    }
+    },
+    "expand": "Ampliar el detalle de {name}",
+    "close": "Cerrar"
   },
   "home": {
     "lead": "Construyo los sistemas sobre los que funcionan las empresas — CRM, ERP, e-commerce y plataformas de compliance — y conduzco personalmente todas las etapas de la entrega: requisitos y arquitectura, front-end y back-end, refinamiento y entrega final.",
@@ -50,7 +50,9 @@
     "meta": {
       "experience": "3+ años",
       "systems": "08 en línea",
-      "status": "Disponible para nuevos proyectos"
+      "industries": "Retail · Educación · Servicios",
+      "status": "Disponible para nuevos proyectos",
+      "statusShort": "Disponible"
     },
     "about": {
       "gutter": "Notas",
@@ -69,7 +71,7 @@
       "gutter": "Detalles",
       "heading": "Tres sistemas, hechos en solitario",
       "lead": "Cada uno de estos lo desarrollé de principio a fin, yo solo — arquitectura, front-end, back-end, refinamiento y entrega. Cada uno tiene su propia lámina.",
-      "seeSheet": "Abrir lámina"
+      "viewCase": "Ver el caso"
     },
     "projects": {
       "gutter": "Listado",
@@ -147,7 +149,7 @@
     }
   },
   "sheet": {
-    "backToSheet": "Volver a la lámina 01",
+    "backToSheet": "Volver a los casos",
     "visitLive": "Abrir el sitio en línea",
     "stationOverview": "Resumen",
     "stationContext": "Contexto",
@@ -185,10 +187,10 @@
   "titleBlock": {
     "drawnBy": "Desarrollado por",
     "drawing": "Dibujo",
-    "sheet": "Lámina",
     "contact": "Contacto",
     "rev": "Rev {rev}",
-    "copyright": "© {year} {name}. Todos los derechos reservados."
+    "copyright": "© {year} {name}. Todos los derechos reservados.",
+    "status": "Estado"
   },
   "notFound": {
     "tag": "Lámina no encontrada",

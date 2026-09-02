@@ -9,18 +9,30 @@ import { routing, localeTags, type Locale } from '@/i18n/routing';
 import { site } from '@/content/site';
 import { absolute, alternates } from '@/lib/seo';
 
+// `latin` alone covers every character these three languages set: Portuguese
+// and Spanish diacritics all live in Latin-1 Supplement (U+00C0-00FF), so the
+// `latin-ext` file was a whole font download nothing on the site rendered.
 const archivo = Archivo({
-  subsets: ['latin', 'latin-ext'],
+  subsets: ['latin'],
   axes: ['wdth'],
   variable: '--font-archivo',
   display: 'swap',
+  // The largest text on the page is set in this face, so it is the LCP font.
+  preload: true,
+  fallback: ['ui-sans-serif', 'system-ui', 'sans-serif'],
+  adjustFontFallback: true,
 });
 
+// Martian Mono only ever sets 11px labels, dimensions and codes — never the
+// LCP text — so it is kept off the critical path. It swaps in a beat later
+// against a metric-matched fallback instead of delaying first paint by ~88kB.
 const martian = Martian_Mono({
   subsets: ['latin'],
   axes: ['wdth'],
   variable: '--font-martian',
   display: 'swap',
+  preload: false,
+  fallback: ['ui-monospace', 'SFMono-Regular', 'monospace'],
 });
 
 /**
@@ -41,6 +53,11 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  // The sheet frame and the docked issue bar reach the physical screen edges,
+  // so the page has to own the area under the notch and the home indicator.
+  viewportFit: 'cover',
   themeColor: [
     { media: '(prefers-color-scheme: light)', color: '#eff1f2' },
     { media: '(prefers-color-scheme: dark)', color: '#0f1315' },
@@ -110,7 +127,12 @@ export default async function LocaleLayout({
         <noscript>
           <style>{'.draws{transform:none!important}.marks{transform:none!important}'}</style>
         </noscript>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        {/* No client component on this site calls `useTranslations` — the
+            switcher needs only `useLocale`, and everything else takes its
+            copy as props from a server component. Passing an empty message
+            set keeps the whole locale dictionary (including every case-page
+            paragraph) out of the HTML and the RSC payload of every route. */}
+        <NextIntlClientProvider messages={{}}>{children}</NextIntlClientProvider>
       </body>
     </html>
   );

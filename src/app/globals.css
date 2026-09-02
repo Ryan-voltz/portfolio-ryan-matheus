@@ -70,9 +70,26 @@
 
 html {
   scroll-behavior: smooth;
-  /* Station rail + sticky header clearance for in-page anchors. */
-  scroll-padding-top: 6.5rem;
+  /* Clears the sticky bar plus the dimension strip beneath it. */
+  scroll-padding-top: calc(var(--bar-h) + var(--strip-h) + 1rem);
   -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --bar-h: 3rem;
+  --strip-h: 2.6rem;
+  /* The physical edges a phone actually gives us. */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --bar-h: 4rem;
+    --strip-h: 0rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -83,6 +100,7 @@ html {
 
 body {
   background: var(--sheet);
+  padding-inline: var(--safe-l) var(--safe-r);
   color: var(--ink);
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -339,6 +357,25 @@ a {
     transparent 1px,
     transparent 6px
   );
+}
+
+/* Each field paints independently: a section's internal layout can never
+   invalidate its neighbours'. Size is deliberately NOT contained — the
+   dimension strip measures real section heights. */
+.field {
+  contain: layout style;
+}
+
+/* An element that breaks the sheet's side padding to reach the screen edges.
+   On a phone the mounted details are the evidence; they get the full width. */
+.bleed {
+  margin-inline: calc(clamp(0.75rem, 3vw, 2.25rem) * -1);
+}
+
+@media (min-width: 64rem) {
+  .bleed {
+    margin-inline: 0;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -810,4 +847,271 @@ a {
   transform: none;
 }
 
+}
+
+@layer components {
+  /* --------------------------------------------------------------------------
+     The dimension strip — the phone's navigation
+     --------------------------------------------------------------------------
+     The hero measures the delivery as a chain of spans. Below 1280px, where the
+     filing margin closes and the station rail has nowhere to live, that same
+     device becomes the navigation: five spans across the width, one per field,
+     each one filling with redline as you read through it. Past fields are
+     measured, the current field is being measured, fields ahead are still
+     hairline. Position and wayfinding in one mark.
+     -------------------------------------------------------------------------- */
+
+  .strip {
+    height: var(--strip-h);
+    border-top: 1px solid var(--rule);
+  }
+
+  .strip ol {
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .strip li {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .strip-span {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    height: 100%;
+    padding-inline: 0.3rem;
+    text-decoration: none;
+    color: var(--ink-3);
+    transition: color 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .strip-span[aria-current='true'] {
+    color: var(--ink);
+  }
+
+  /* The measured span itself: a hairline that the redline fills. */
+  .strip-track {
+    position: relative;
+    display: block;
+    height: 1px;
+    background: var(--rule-strong);
+  }
+
+  .strip-track::before,
+  .strip-track::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    width: 1px;
+    height: 7px;
+    background: var(--rule-strong);
+  }
+  .strip-track::before {
+    left: 0;
+  }
+  .strip-track::after {
+    right: 0;
+  }
+
+  .strip-fill {
+    position: absolute;
+    inset: 0;
+    display: block;
+    background: var(--red);
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 120ms linear;
+  }
+
+  .strip-span[aria-current='true'] .strip-track::before,
+  .strip-span[aria-current='true'] .strip-track::after {
+    background: var(--red);
+    top: -4px;
+    height: 9px;
+  }
+
+  .strip-name {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: clamp(0.5rem, 2.1vw, 0.625rem);
+    font-weight: 600;
+    font-stretch: 92%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    /* Room for the accent on an uppercase Í or Ã: this box clips its overflow
+       to ellipsize long station names, and a line-height of 1 cropped the
+       diacritic clean off in Portuguese and Spanish. */
+    line-height: 1.35;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .strip-fill {
+      transition: none;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     The issue bar — docked in the thumb zone
+     --------------------------------------------------------------------------
+     A drawing carries its issue stamp at the edge of the sheet. On a phone the
+     edge that matters is the bottom one, where the thumb already rests. The bar
+     arrives once the hero's own action has scrolled away, so the page never
+     shows two primary actions at once.
+     -------------------------------------------------------------------------- */
+
+  .dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 55;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-top: 1px solid var(--rule-strong);
+    background: var(--sheet);
+    padding: 0.6rem clamp(0.75rem, 3vw, 1rem);
+    padding-inline-start: max(clamp(0.75rem, 3vw, 1rem), var(--safe-l));
+    padding-inline-end: max(clamp(0.75rem, 3vw, 1rem), var(--safe-r));
+    padding-bottom: max(0.6rem, var(--safe-b));
+    transform: translateY(110%);
+    transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dock[data-shown='true'] {
+    transform: none;
+  }
+
+  .dock-status {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-width: 0;
+    flex: 0 1 auto;
+    margin-inline-end: auto;
+  }
+
+  .dock-status span:not(.rev-tri):not(.sr-only) {
+    display: none;
+  }
+
+  @media (min-width: 27rem) {
+    .dock-status span:not(.rev-tri):not(.sr-only) {
+      display: inline;
+    }
+  }
+
+  .dock .plate {
+    padding: 0.7rem 1rem;
+    flex: none;
+  }
+
+  @media (min-width: 64rem) {
+    .dock {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dock {
+      transition: none;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Detail viewer — a mounted shot opened at working size
+     -------------------------------------------------------------------------- */
+
+  .viewer {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--sheet);
+    color: var(--ink);
+  }
+
+  .viewer::backdrop {
+    background: color-mix(in oklab, var(--ink) 82%, transparent);
+  }
+
+  .viewer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: max(0.75rem, var(--safe-t)) clamp(0.75rem, 3vw, 1.5rem) 0.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* The shot is shown wider than the screen and panned, because a 1600px
+     capture squeezed into 390px is a thumbnail, not a detail. */
+  .viewer-scroll {
+    display: grid;
+    place-content: center start;
+    overflow: auto;
+    height: calc(100dvh - 8rem);
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+    background: var(--field);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .viewer-scroll img {
+    display: block;
+    width: 220%;
+    max-width: none;
+    height: auto;
+    border: 1px solid var(--rule-strong);
+  }
+
+  @media (min-width: 48rem) {
+    .viewer-scroll img {
+      width: 100%;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Touch: every target a thumb can actually hit
+     -------------------------------------------------------------------------- */
+
+  @media (pointer: coarse) {
+    .locale-link {
+      min-height: 2.75rem;
+      display: flex;
+      align-items: center;
+      padding-inline: 0.85rem;
+    }
+
+    .chip {
+      min-height: 2.75rem;
+    }
+
+    .schedule-link {
+      min-height: 3.5rem;
+    }
+
+    .station {
+      padding-block: 0.6rem;
+    }
+  }
+
+  /* Touch devices get no hover state to depend on; the leader line and the
+     mount zoom are pointer affordances, so they resolve to their rest state. */
+  @media (hover: none) {
+    .detail .mount img {
+      transform: none !important;
+    }
+  }
 }

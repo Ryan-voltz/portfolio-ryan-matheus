@@ -11,7 +11,7 @@ export default async function NotFound() {
   return (
     <>
       <SheetFrame />
-      <Header />
+      <Header stations={[]} />
       <main className="relative">
         <div className="field-grid" aria-hidden />
         <div className="sheet relative flex min-h-[60svh] flex-col justify-center py-24">
@@ -31,7 +31,7 @@ export default async function NotFound() {
           </div>
         </div>
       </main>
-      <TitleBlock sheet="01" />
+      <TitleBlock />
     </>
   );
 }

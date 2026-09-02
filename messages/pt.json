@@ -19,23 +19,23 @@
     "stack": "Stack",
     "drawnBy": "Desenvolvido por",
     "soleAuthor": "Ryan Matheus — 100%",
-    "openSheet": "Abrir prancha {sheet}",
     "detail": "Detalhe",
     "item": "Item",
     "project": "Projeto",
     "type": "Tipo",
+    "industries": "Setores",
+    "languages": "Idiomas",
     "experience": "Experiência",
     "systems": "Sistemas",
-    "scale": "Escala",
-    "sheet": "Prancha",
-    "rev": "Rev",
     "status": "Status",
     "stackRole": {
       "react": "Camada de interface",
       "vite": "Build e servidor de desenvolvimento",
       "supabase": "Banco de dados, autenticação e API",
       "framermotion": "Movimento da interface"
-    }
+    },
+    "expand": "Ampliar o detalhe de {name}",
+    "close": "Fechar"
   },
   "home": {
     "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce e plataformas de compliance — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
@@ -50,7 +50,9 @@
     "meta": {
       "experience": "3+ anos",
       "systems": "08 no ar",
-      "status": "Disponível para novos projetos"
+      "industries": "Varejo · Educação · Serviços",
+      "status": "Disponível para novos projetos",
+      "statusShort": "Disponível"
     },
     "about": {
       "gutter": "Notas",
@@ -69,7 +71,7 @@
       "gutter": "Detalhes",
       "heading": "Três sistemas, feitos sozinho",
       "lead": "Cada um destes eu desenvolvi de ponta a ponta, sozinho — arquitetura, front-end, back-end, refinamento e entrega. Cada um tem a sua própria prancha.",
-      "seeSheet": "Abrir prancha"
+      "viewCase": "Ver o case"
     },
     "projects": {
       "gutter": "Relação",
@@ -147,7 +149,7 @@
     }
   },
   "sheet": {
-    "backToSheet": "Voltar para a prancha 01",
+    "backToSheet": "Voltar aos cases",
     "visitLive": "Abrir o site no ar",
     "stationOverview": "Visão geral",
     "stationContext": "Contexto",
@@ -185,10 +187,10 @@
   "titleBlock": {
     "drawnBy": "Desenvolvido por",
     "drawing": "Desenho",
-    "sheet": "Prancha",
     "contact": "Contato",
     "rev": "Rev {rev}",
-    "copyright": "© {year} {name}. Todos os direitos reservados."
+    "copyright": "© {year} {name}. Todos os direitos reservados.",
+    "status": "Status"
   },
   "notFound": {
     "tag": "Prancha não encontrada",

@@ -6,12 +6,20 @@ import { routing } from '@/i18n/routing';
 export default createMiddleware(routing);
 
 export const config = {
-  // Everything except Next internals, the API surface, generated metadata routes
-  // and files with an extension.
+  // Everything except Next internals, the API surface, generated metadata
+  // routes, and any path carrying a file extension.
   //
-  // `opengraph-image` is excluded on purpose: the route lives under [locale], so
-  // without this the English card at /en/opengraph-image would answer with a 307
-  // to the unprefixed path, and a crawler that does not follow redirects would
-  // show no link preview at all.
-  matcher: '/((?!api|_next|_vercel|.*opengraph-image.*|.*\\..*).*)',
+  // Next's generated metadata routes (`icon`, `apple-icon`, `opengraph-image`)
+  // are extensionless, so without naming them here the locale negotiator tries
+  // to prefix them and the browser gets a 404 where the favicon should be.
+  // `opengraph-image` matters twice over: its route lives under [locale], so
+  // the English card at /en/opengraph-image would otherwise answer with a 307,
+  // and a crawler that does not follow redirects would show no link preview.
+  //
+  // The extension test is written `[.]` rather than as an escaped dot: this
+  // string is the source of a regex, and a lone backslash here is one bad
+  // copy away from becoming `.`, which silently matches every path and turns
+  // the whole negative lookahead into "skip everything".
+  matcher:
+    '/((?!api|_next|_vercel|icon|apple-icon|.*opengraph-image.*|.*twitter-image.*|manifest|sitemap|robots|.*[.].*).*)',
 };

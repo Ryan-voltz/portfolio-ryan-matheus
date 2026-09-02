@@ -3,14 +3,15 @@ import { hasLocale } from 'next-intl';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { routing, type Locale } from '@/i18n/routing';
-import { site } from '@/content/site';
+import { site, whatsappHref } from '@/content/site';
 import { featuredProjects, getFeatured, getSiblings } from '@/content/projects';
 import { absolute, alternates } from '@/lib/seo';
 import { Link } from '@/i18n/navigation';
 
 import Header from '@/components/Header';
 import SheetFrame from '@/components/SheetFrame';
-import StationRail from '@/components/StationRail';
+import DockedActions from '@/components/DockedActions';
+import { CaseJsonLd } from '@/components/JsonLd';
 import Cartouche from '@/components/Cartouche';
 import SectionHead from '@/components/SectionHead';
 import MountedShot from '@/components/MountedShot';
@@ -67,6 +68,8 @@ export default async function CasePage({
   const s = await getTranslations('sheet');
   const tw = await getTranslations('work');
   const nav = await getTranslations('nav');
+  const hm = await getTranslations('home');
+  const contact = await getTranslations('contact');
   const { previous, next } = getSiblings(slug);
 
   const stations = [
@@ -81,12 +84,19 @@ export default async function CasePage({
 
   return (
     <>
+      <CaseJsonLd
+        locale={locale as Locale}
+        name={t('name')}
+        description={t('summary')}
+        path={`/work/${slug}`}
+        liveUrl={project.url}
+        homeLabel={nav('start')}
+      />
       <a href="#main" className="u-skip u-label">
         {c('skipToContent')}
       </a>
       <SheetFrame />
-      <Header />
-      <StationRail stations={stations} label={nav('sections')} />
+      <Header stations={stations} />
 
       <main id="main">
         <Reveal as="section" id="top" className="relative scroll-mt-28">
@@ -137,9 +147,7 @@ export default async function CasePage({
                 rows={[
                   { label: c('drawnBy'), value: c('soleAuthor') },
                   { label: c('stack'), value: project.stack.join(' · ') },
-                  { label: c('scale'), value: '1:1' },
-                  { label: c('sheet'), value: `${project.sheet} / 0${site.sheetCount}` },
-                  { label: c('rev'), value: site.revision },
+                  { label: c('status'), value: hm('meta.status'), accent: true },
                 ]}
               />
             </div>
@@ -151,13 +159,16 @@ export default async function CasePage({
                 caption={`${c('detail')} ${project.callout} — ${project.domain}`}
                 priority
                 sizes="(max-width: 1023px) 100vw, 92vw"
+                expandLabel={c('expand', { name: t('name') })}
+                closeLabel={c('close')}
+                bleed
               />
             </div>
           </div>
         </Reveal>
 
         {/* CONTEXT + CHALLENGE ------------------------------------------- */}
-        <Reveal as="section" id="context" className="scroll-mt-28 py-20 md:py-24">
+        <Reveal as="section" id="context" className="field scroll-mt-28 py-20 md:py-24">
           <div className="sheet">
             <SectionHead
               gutter={s('gutterContext')}
@@ -178,7 +189,7 @@ export default async function CasePage({
         </Reveal>
 
         {/* STACK ---------------------------------------------------------- */}
-        <Reveal as="section" id="stack" className="scroll-mt-28 py-20 md:py-24">
+        <Reveal as="section" id="stack" className="field scroll-mt-28 py-20 md:py-24">
           <div className="sheet">
             <SectionHead
               gutter={s('gutterStack')}
@@ -217,7 +228,7 @@ export default async function CasePage({
         </Reveal>
 
         {/* DELIVERED ------------------------------------------------------ */}
-        <Reveal as="section" id="delivered" className="scroll-mt-28 py-20 md:py-24">
+        <Reveal as="section" id="delivered" className="field scroll-mt-28 py-20 md:py-24">
           <div className="sheet">
             <SectionHead
               gutter={s('gutterDelivered')}
@@ -250,7 +261,7 @@ export default async function CasePage({
         </Reveal>
 
         {/* RESULT --------------------------------------------------------- */}
-        <Reveal as="section" id="result" className="relative scroll-mt-28 py-20 md:py-24">
+        <Reveal as="section" id="result" className="field relative scroll-mt-28 py-20 md:py-24">
           <div className="field-grid" aria-hidden />
           <div className="sheet relative">
             <SectionHead
@@ -319,7 +330,15 @@ export default async function CasePage({
 
       </main>
 
-      <TitleBlock sheet={project.sheet} />
+      <TitleBlock />
+
+      <DockedActions
+        email={site.email}
+        whatsappHref={whatsappHref(contact('whatsappMessage'))}
+        status={hm('meta.statusShort')}
+        cta={hm('cta')}
+        whatsappLabel="WhatsApp"
+      />
     </>
   );
 }

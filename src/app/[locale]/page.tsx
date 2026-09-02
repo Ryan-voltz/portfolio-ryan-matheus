@@ -4,13 +4,14 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 import { routing, type Locale } from '@/i18n/routing';
 import { Link } from '@/i18n/navigation';
-import { site } from '@/content/site';
+import { site, whatsappHref } from '@/content/site';
 import { featuredProjects, otherProjects } from '@/content/projects';
 import { absolute, alternates } from '@/lib/seo';
 
 import Header from '@/components/Header';
 import SheetFrame from '@/components/SheetFrame';
-import StationRail from '@/components/StationRail';
+import DockedActions from '@/components/DockedActions';
+import { HomeJsonLd } from '@/components/JsonLd';
 import DimensionChain from '@/components/DimensionChain';
 import Cartouche from '@/components/Cartouche';
 import SectionHead from '@/components/SectionHead';
@@ -47,6 +48,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const nav = await getTranslations('nav');
   const tw = await getTranslations('work');
   const c = await getTranslations('common');
+  const contact = await getTranslations('contact');
+  const meta = await getTranslations('meta');
 
   const notes = ['n1', 'n2', 'n3', 'n4', 'n5'] as const;
 
@@ -60,12 +63,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
+      <HomeJsonLd locale={locale as Locale} description={meta('description')} />
       <a href="#main" className="u-skip u-label">
         {c('skipToContent')}
       </a>
       <SheetFrame />
-      <Header />
-      <StationRail stations={stations} label={nav('sections')} />
+      <Header stations={stations} />
 
       <main id="main">
         {/* ------------------------------------------------------------------
@@ -146,9 +149,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   rows={[
                     { label: c('experience'), value: t('meta.experience') },
                     { label: c('systems'), value: t('meta.systems') },
-                    { label: c('scale'), value: '1:1' },
-                    { label: c('sheet'), value: `01 / 0${site.sheetCount}` },
-                    { label: c('rev'), value: site.revision },
+                    { label: c('industries'), value: t('meta.industries') },
+                    { label: c('languages'), value: 'EN · PT · ES' },
                     { label: c('status'), value: t('meta.status'), accent: true },
                   ]}
                 />
@@ -160,7 +162,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         {/* ------------------------------------------------------------------
             GENERAL NOTES — the bio, in the form a drawing states its notes.
         ------------------------------------------------------------------- */}
-        <Reveal as="section" id="about" className="scroll-mt-28 py-20 md:py-28">
+        <Reveal as="section" id="about" className="field scroll-mt-28 py-20 md:py-28">
           <div className="sheet">
             <SectionHead
               gutter={t('about.gutter')}
@@ -191,7 +193,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               <div className="marks">
                 {/* Drop a 4:5 image at public/portrait.jpg and replace this mount
                     with a next/image inside the same wrapper. */}
-                <div className="mount flex aspect-4/5 flex-col items-center justify-center gap-3 px-6 text-center">
+                <div className="mount mx-auto flex aspect-4/5 w-full max-w-[13rem] flex-col items-center justify-center gap-3 px-5 text-center lg:mx-0 lg:max-w-none">
                   <span className="rev-tri" aria-hidden />
                   <span className="u-label u-label-red font-medium">{t('about.portraitTag')}</span>
                   <span className="max-w-[24ch] text-[0.8125rem] leading-relaxed text-[var(--ink-2)]">
@@ -210,7 +212,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         {/* ------------------------------------------------------------------
             DETAILS A / B / C — the three cases, each given the full measure.
         ------------------------------------------------------------------- */}
-        <Reveal as="section" id="work" className="relative scroll-mt-28 py-20 md:py-28">
+        <Reveal as="section" id="work" className="field relative scroll-mt-28 py-20 md:py-28">
           <div className="field-grid" aria-hidden />
           <div className="sheet relative">
             <SectionHead
@@ -231,7 +233,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         {/* ------------------------------------------------------------------
             SCHEDULE — everything else, as a bill of materials.
         ------------------------------------------------------------------- */}
-        <Reveal as="section" id="projects" className="scroll-mt-28 py-20 md:py-28">
+        <Reveal as="section" id="projects" className="field scroll-mt-28 py-20 md:py-28">
           <div className="sheet">
             <SectionHead
               gutter={t('projects.gutter')}
@@ -248,7 +250,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <ContactBlock />
       </main>
 
-      <TitleBlock sheet="01" />
+      <TitleBlock />
+
+      <DockedActions
+        email={site.email}
+        whatsappHref={whatsappHref(contact('whatsappMessage'))}
+        status={t('meta.statusShort')}
+        cta={t('cta')}
+        whatsappLabel="WhatsApp"
+      />
     </>
   );
 }

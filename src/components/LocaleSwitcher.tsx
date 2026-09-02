@@ -41,7 +41,7 @@ export default function LocaleSwitcher({ label, className }: Props) {
                 // footer. Only the visible text changes here, so the reader's
                 // scroll position is exactly what should stay put.
                 scroll={false}
-                className="u-label relative block px-2.5 py-1.5 transition-colors duration-200 hover:text-[var(--ink)] data-[on=true]:text-[var(--red-ink)]"
+                className="locale-link u-label relative block px-2.5 py-1.5 transition-colors duration-200 hover:text-[var(--ink)] data-[on=true]:text-[var(--red-ink)]"
                 data-on={isActive}
               >
                 {localeNames[loc]}

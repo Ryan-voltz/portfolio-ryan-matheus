@@ -2,6 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { site } from '@/content/site';
 import LocaleSwitcher from './LocaleSwitcher';
+import SheetNav, { type Station } from './SheetNav';
 import { ArrowRight } from './Icons';
 
 const sections = [
@@ -11,17 +12,24 @@ const sections = [
   { href: '/#contact', key: 'contact' },
 ] as const;
 
-/** The top edge of the sheet: who drew it, what language it reads in, how to write back. */
-export default async function Header() {
+/**
+ * The top edge of the sheet: who drew it, what language it reads in, how to
+ * write back — and, below 1280px, the dimension strip that says where in the
+ * sheet you are.
+ *
+ * The bar is opaque rather than frosted: a drawing has no glass, and a
+ * backdrop filter is the most expensive thing a phone paints while scrolling.
+ */
+export default async function Header({ stations }: { stations: Station[] }) {
   const t = await getTranslations('nav');
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-[var(--sheet)]/94 backdrop-blur-[6px]">
+    <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-[var(--sheet)]">
       <div className="sheet">
-        <div className="flex h-14 items-center justify-between gap-4 md:h-16">
+        <div className="flex h-[var(--bar-h)] items-center justify-between gap-4">
           <Link
             href="/"
-            className="group flex items-baseline gap-3 no-underline"
+            className="flex items-baseline gap-3 no-underline"
             aria-label={t('home')}
           >
             <span className="u-display text-[1.0625rem] tracking-[-0.02em] md:text-[1.1875rem]">
@@ -37,7 +45,10 @@ export default async function Header() {
               <ul className="flex items-center gap-6">
                 {sections.map((s) => (
                   <li key={s.key}>
-                    <Link href={s.href} className="u-tag u-tag-ink hover:text-[var(--red-ink)] transition-colors duration-200 no-underline">
+                    <Link
+                      href={s.href}
+                      className="u-tag u-tag-ink no-underline transition-colors duration-200 hover:text-[var(--red-ink)]"
+                    >
                       {t(s.key)}
                     </Link>
                   </li>
@@ -49,7 +60,7 @@ export default async function Header() {
 
             <a
               href={`mailto:${site.email}`}
-              className="u-tag hidden items-center gap-2 border border-[var(--red)] px-3 py-[0.4rem] text-[var(--red-ink)] no-underline transition-colors duration-200 hover:bg-[var(--red)] hover:text-[var(--plate-ink)] md:inline-flex"
+              className="u-tag hidden items-center gap-2 border border-[var(--red)] px-3 py-[0.45rem] text-[var(--red-ink)] no-underline transition-colors duration-200 hover:bg-[var(--red)] hover:text-[var(--plate-ink)] md:inline-flex"
             >
               {t('write')}
               <ArrowRight size={13} />
@@ -58,20 +69,9 @@ export default async function Header() {
         </div>
       </div>
 
-      {/* Mobile wayfinding: the same stations, on one scrollable strip. */}
-      <nav aria-label={t('sections')} className="border-t border-[var(--rule)] lg:hidden">
-        <div className="sheet">
-          <ul className="-mx-1 flex items-center gap-5 overflow-x-auto py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {sections.map((s) => (
-              <li key={s.key} className="shrink-0 px-1">
-                <Link href={s.href} className="u-tag u-tag-ink no-underline">
-                  {t(s.key)}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
+      {/* Mounted once: it renders the ≥1280px station rail (fixed, out in the
+          filing margin) and the dimension strip below that, off one listener. */}
+      <SheetNav stations={stations} label={t('sections')} />
     </header>
   );
 }

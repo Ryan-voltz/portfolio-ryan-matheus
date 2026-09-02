@@ -9,6 +9,10 @@ import { ArrowRight, ArrowOut } from './Icons';
  * One featured case, given the full measure of the sheet. Details alternate
  * sides down the page the way they are placed on a real drawing — where they
  * fit — which also paces the scroll.
+ *
+ * On a phone that alternation has nowhere to go, so the order changes instead:
+ * the mounted detail leads and the reading follows. A buyer scrolling a
+ * portfolio on a phone is looking for the work, not for a paragraph about it.
  */
 export default async function CaseBand({
   project,
@@ -19,14 +23,13 @@ export default async function CaseBand({
 }) {
   const t = await getTranslations(`work.${project.slug}`);
   const c = await getTranslations('common');
+  const h = await getTranslations('home.work');
   const mirrored = index % 2 === 1;
 
   return (
     <Reveal as="article" className="detail group border-t border-[var(--rule)] pt-10 md:pt-14">
-      <div
-        className={`grid items-start gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]`}
-      >
-        <div className={mirrored ? 'lg:order-2' : undefined}>
+      <div className="grid items-start gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+        <div className={`order-2 ${mirrored ? 'lg:order-2' : 'lg:order-1'}`}>
           <div className="flex items-center gap-4">
             <span className="callout marks">
               <span>{project.callout}</span>
@@ -51,7 +54,10 @@ export default async function CaseBand({
             {t('type')}
           </p>
 
-          <p className="u-body marks mt-6 max-w-[52ch]" style={{ ['--draw-delay' as string]: '150ms' }}>
+          <p
+            className="u-body marks mt-6 max-w-[52ch]"
+            style={{ ['--draw-delay' as string]: '150ms' }}
+          >
             {t('summary')}
           </p>
 
@@ -68,7 +74,7 @@ export default async function CaseBand({
 
           <div className="marks mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
             <Link href={`/work/${project.slug}`} className="plate">
-              {c('openSheet', { sheet: project.sheet })}
+              {h('viewCase')}
               <ArrowRight size={16} />
             </Link>
             <a
@@ -83,11 +89,14 @@ export default async function CaseBand({
           </div>
         </div>
 
-        <div className={mirrored ? 'lg:order-1' : undefined}>
+        <div className={`order-1 ${mirrored ? 'lg:order-1' : 'lg:order-2'}`}>
           <MountedShot
             src={project.shot}
             alt={t('shotAlt')}
             caption={`${c('detail')} ${project.callout} — ${project.domain}`}
+            expandLabel={c('expand', { name: t('name') })}
+            closeLabel={c('close')}
+            bleed
           />
         </div>
       </div>

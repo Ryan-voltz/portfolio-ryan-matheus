@@ -32,7 +32,7 @@ export default async function ScheduleOfWorks() {
               href={project.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="group grid grid-cols-[2.25rem_4.25rem_minmax(0,1fr)_1.25rem] items-center gap-x-4 py-4 no-underline transition-colors duration-200 hover:bg-[color-mix(in_oklab,var(--red)_5%,transparent)] md:grid-cols-[3.5rem_7rem_minmax(0,1.15fr)_minmax(0,1fr)_2rem] md:gap-x-5 md:py-5"
+              className="schedule-link group grid grid-cols-[2rem_5.5rem_minmax(0,1fr)_1.25rem] items-center gap-x-3.5 py-4 no-underline transition-colors duration-200 hover:bg-[color-mix(in_oklab,var(--red)_5%,transparent)] md:grid-cols-[3.5rem_7rem_minmax(0,1.15fr)_minmax(0,1fr)_2rem] md:gap-x-5 md:py-5"
             >
               <span className="u-num text-[0.6875rem] text-[var(--ink-3)]">
                 {String(i + 1).padStart(2, '0')}
@@ -44,7 +44,7 @@ export default async function ScheduleOfWorks() {
                   alt=""
                   width={1600}
                   height={1000}
-                  sizes="112px"
+                  sizes="(max-width: 767px) 88px, 112px"
                   className="h-auto w-full"
                 />
               </span>
@@ -56,7 +56,7 @@ export default async function ScheduleOfWorks() {
                 <span className="u-num mt-1 block truncate text-[0.6875rem] tracking-[0.05em] text-[var(--ink-3)] transition-colors duration-200 group-hover:text-[var(--red-ink)]">
                   {project.domain}
                 </span>
-                <span className="mt-2 block text-[0.875rem] leading-snug text-[var(--ink-2)] md:hidden">
+                <span className="mt-2 block text-[0.8125rem] leading-snug text-[var(--ink-2)] md:hidden">
                   {t(`${project.slug}.type`)}
                 </span>
               </span>

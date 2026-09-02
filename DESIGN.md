@@ -74,6 +74,44 @@ typography:
     letterSpacing: "0.14em"
     fontVariation: "'wdth' 88"
     fontFeature: "tabular-nums"
+  wordmark:
+    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1.1875rem"
+    fontWeight: 700
+    letterSpacing: "-0.02em"
+  meta:
+    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 500
+    letterSpacing: "-0.01em"
+  caption:
+    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.8125rem"
+    fontWeight: 400
+    lineHeight: 1.4
+  micro:
+    fontFamily: "Martian Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "0.75rem"
+    fontWeight: 400
+    letterSpacing: "0.05em"
+    fontFeature: "tabular-nums"
+  data:
+    fontFamily: "Martian Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "0.625rem"
+    fontWeight: 400
+    letterSpacing: "0.04em"
+    fontFeature: "tabular-nums"
+  code:
+    fontFamily: "Martian Mono, ui-monospace, SFMono-Regular, monospace"
+    fontSize: "0.5625rem"
+    fontWeight: 400
+    letterSpacing: "0.08em"
+  strip:
+    fontFamily: "Archivo, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(0.5rem, 2.1vw, 0.625rem)"
+    fontWeight: 600
+    letterSpacing: "0.08em"
+    fontVariation: "'wdth' 92"
 rounded:
   none: "0"
   hairline: "1px"
@@ -192,13 +230,21 @@ A cool, neutral drafting palette in both themes, with exactly one saturated colo
 - **Lead** (400, `clamp(1.0625rem, 0.98rem + 0.42vw, 1.25rem)`, lh 1.55, Graphite 2): the sentence under a field heading. Measure 62–64ch.
 - **Body** (400, 1rem, lh 1.6, Graphite 2): notes, context, delivered items. Measure capped at 68ch.
 - **Tag** (600, 0.6875rem, ls 0.13em, uppercase, `wdth` 92): drawing lettering for names and actions — navigation, field labels in the margin, project type lines, secondary actions, channel chips, sheet-nav labels, station names.
-- **Label** (Martian Mono, 0.6875rem, ls 0.14em, uppercase, tabular): dimensions, codes and status — title-block labels and values, station numbers, sheet and revision numbers, detail captions, schedule column heads and item numbers, domains, stack values, status lines.
+- **Label** (Martian Mono, 0.6875rem, ls 0.14em, uppercase, tabular): dimensions, codes and status — title-block labels and values, station numbers, revision numbers, detail captions, schedule column heads and item numbers, domains, stack values, status lines.
+- **Wordmark** (700, 1.1875rem, ls −0.02em): the header signature only.
+- **Meta** (500, 0.9375rem): title-block values, schedule row names, redline body.
+- **Caption** (400, 0.8125rem): title-block sub-lines, the portrait slot's note.
+- **Micro / Data** (Martian Mono, 0.75rem / 0.625rem, tabular): stack values in a case band, station numbers, the sheet index's callout codes.
+- **Code** (Martian Mono, 0.5625rem, ls 0.08em): the sheet number inside a callout bubble — the smallest lettering in the system, and the only thing set at it.
+- **Strip** (600, `clamp(0.5rem, 2.1vw, 0.625rem)`, ls 0.08em, uppercase): the mobile dimension strip's five span labels, sized to survive five of them across a 320px screen.
 
 ### Named Rules
 
 **The Two Registers Rule.** Mono is for what a drawing sets in mono: dimensions, codes, item numbers, domains, revision and status. Everything a person reads or clicks — nav, headings, body, buttons, chips, field labels — is the gothic. Monospace used to make something *look* technical is the failure this rule exists to prevent.
 
 **The Two Extremes Rule.** The sheet is lettered at drawing scale or at 11px, with very little between. Resist inventing a mid-size heading to soften a jump; the jump is the drawing's own rhythm.
+
+**The Decision Rule (cartouche).** A title block on this site carries facts a buyer decides on — experience, systems live, industries, languages, availability — never the drawing's own filing metadata. Scale and sheet number were removed from every cartouche for exactly this reason: they are world-native and they told the visitor nothing. The sheet reference survives only where it is functional, inside the callout bubble beside a case title.
 
 ## Layout
 
@@ -209,6 +255,14 @@ Fields are separated by one full-measure `1px` heavy rule, then a `9rem` margin 
 Vertical rhythm: `py-20 md:py-28` per field, `mt-6` from the field rule to its heading, `mt-12`–`mt-14` from heading block to content, `py-6` per list row, `1.5rem`/`2.25rem`/`3rem` for internal gaps. More space above a heading than below it, everywhere.
 
 Breakpoints are Tailwind's defaults — `sm` 640, `md` 768, `lg` 1024, `xl` 1280 — and the system changes shape at three of them: `md` turns the dimension chain from vertical to horizontal and reveals the drawing border, `lg` opens the two-column fields and the margin labels, `xl` (80rem) opens the filing margin, the station rail and the margin hairline.
+
+**Below `xl` the sheet is not a narrowed desktop — it is the drawing folded to pocket size**, and three things change rather than shrink:
+
+1. The station rail has no margin to live in, so wayfinding becomes the **dimension strip** in the header (see Components). The hero's measuring device does the navigation's job.
+2. Mounted details **break the sheet's side padding** (`.bleed`) and run to the physical screen edges. On a phone the screenshots are the evidence, and evidence gets the full width.
+3. Case bands **reverse their reading order**: the mounted detail leads and the prose follows. The desktop's left/right alternation has nowhere to go on one column, so the order carries the pacing instead.
+
+The page owns the physical screen: `viewport-fit=cover` plus `env(safe-area-inset-*)` on the body's inline padding, the docked issue bar's bottom padding, and the detail viewer's head. Touch targets are raised to a 44px minimum under `@media (pointer: coarse)` rather than globally, so a mouse still gets the tighter drawing density.
 
 The construction grid (`.field-grid`, 2.5rem squares at ~5% ink, radially masked) is laid under the fields where a drawing field belongs: the first viewport, the details field, the issue block and each case sheet's overview and result. It is a ground, not a texture — it never runs under running body copy at full strength.
 
@@ -250,6 +304,15 @@ There are no cards. The container vocabulary is the **mount** (a `1px` Heavy Lin
 - **Station rail (≥80rem):** the page's single vertical axis, fixed in the filing margin. A mono station number, a hairline mark, and a Tag-set name. The active station takes the redline **and** stretches its mark to `scaleX(1.45)` — the state is a mark first, a colour second.
 - **Locale switcher:** three real links in a bordered segmented control, not a dropdown. Active carries Redline Ink plus a redline underline that scales in from the left, and `aria-current`.
 
+### Dimension Strip (below 1280px)
+The phone's navigation, and the system's second use of its own signature device. Five spans across the header's full width, one per field, each a hairline with end ticks and a Tag-set label beneath. The span you are reading fills with redline in proportion to your scroll through that field; fields behind you are fully measured, fields ahead are still hairline. Position, progress and wayfinding in one mark, off a single rAF-throttled scroll listener shared with the desktop station rail. There is no hamburger anywhere in this system — a drawing already knows how to say where you are.
+
+### Issue Bar (below 1024px)
+The issue stamp, docked in the thumb zone. It slides up once the hero's own action has scrolled out of reach and stands down again over the contact block, so two primary actions are never on screen at once. Carries the redline status triangle, a WhatsApp chip and the action plate; `padding-bottom: max(0.6rem, env(safe-area-inset-bottom))`. The status word hides below 27rem and survives as screen-reader text.
+
+### Detail Viewer
+Tapping any mounted detail opens it in a native `<dialog>` at 220% of the viewport width on a phone, pannable, on the Field Tone ground. A 1600px capture shown 366px wide is a thumbnail of a system, not evidence of one. The full-size image is mounted only on first open — a closed dialog is `display:none`, which does not stop a fetch.
+
 ### Signature component — the Dimension Chain
 The system's thesis device. Four spans measured across the full sheet width, each with extension ticks and inward arrowheads and its stage lettered beneath; then one redline overall bracket spanning all four, carrying a single name as its dimension value. It appears twice: measuring the delivery stages on sheet 01, and measuring the delivered scope on every case sheet. Below `md` it rotates to a vertical chain with the bracket running down the left.
 
@@ -265,6 +328,8 @@ One authored moment, one curve. Rules draw themselves in left to right (`transfo
 - **Do** put a fact that is not yet supplied into a redline note that names the gap, in every locale. An honest hole is part of this system.
 - **Do** set anything a person reads or clicks in Archivo, and anything measured in Martian Mono.
 - **Do** open every field with one full-measure heavy rule and put its label in the margin at `lg` and above.
+- **Do** let the phone reorder and re-house a device rather than shrink it: the rail becomes the strip, the detail leads the band, the shot reaches the screen edges.
+- **Do** put a cartouche row in front of a buyer only if it changes a hiring decision.
 
 ### Don't:
 - **Don't** add a shadow, bevel, glow, gradient or faux material, in any theme or state.
@@ -274,4 +339,6 @@ One authored moment, one curve. Rules draw themselves in left to right (`transfo
 - **Don't** use a warm or cream ground; the world is film and vellum.
 - **Don't** build a grid of same-size cards. The page's containers are mounts, cartouches, schedules and notes.
 - **Don't** gate text on a reveal animation. Content is readable at first paint, with or without JavaScript.
+- **Don't** ship a hamburger, a drawer, or a mobile-only menu pattern; the dimension strip is the navigation below 1280px.
+- **Don't** put the drawing's filing metadata (scale, sheet number, revision) in a cartouche a buyer reads to decide.
 - **Don't** number a section unless the sequence carries information the reader needs — the station rail and drawing notes are numbered because a drawing's index and notes genuinely are.
