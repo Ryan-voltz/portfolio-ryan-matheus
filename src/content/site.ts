@@ -7,7 +7,7 @@
 export const site = {
   name: 'Ryan Matheus',
   /** Pinned headline. Do not reword. */
-  headline: 'Full-Stack Developer — Custom CRM/ERP, E-commerce & Business Systems',
+  headline: 'Full-Stack Developer — CRM/ERP, E-commerce, Landing Pages & Portfolios',
   email: 'ryan.voltzagency@gmail.com',
   domain: 'ryanmatheus.com.br',
   url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ryanmatheus.com.br',

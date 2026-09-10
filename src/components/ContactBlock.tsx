@@ -2,45 +2,58 @@ import { getTranslations } from 'next-intl/server';
 import { site, whatsappHref } from '@/content/site';
 import SectionHead from './SectionHead';
 import Reveal from './Reveal';
-import { ArrowRight, ArrowOut } from './Icons';
+import { ArrowRight, ArrowOut, WhatsApp } from './Icons';
 
-/** The issue block: who to write to, on which channel, and the sheet's status. */
+import CopyEmailButton from './CopyEmailButton';
+
+/** The contact block: who to write to, on which channel, and availability status. */
 export default async function ContactBlock() {
   const t = await getTranslations('contact');
 
   const channels = [
+    { label: 'WhatsApp', href: whatsappHref(t('whatsappMessage')), primary: true },
     { label: 'LinkedIn', href: site.links.linkedin },
     { label: 'GitHub', href: site.links.github },
-    { label: 'WhatsApp', href: whatsappHref(t('whatsappMessage')) },
   ];
 
   return (
     <Reveal as="section" id="contact" className="relative scroll-mt-28 py-20 md:py-28">
-      <div className="field-grid" aria-hidden />
       <div className="sheet relative">
-        <SectionHead
-          gutter={t('gutter')}
-          headingId="contact-heading"
-          heading={t('heading')}
-          lead={t('lead')}
-        />
+        <div className="rounded-3xl border border-[var(--rule)] bg-[var(--card)] p-8 md:p-14 shadow-sm">
+          <SectionHead
+            gutter={t('gutter')}
+            headingId="contact-heading"
+            heading={t('heading')}
+            lead={t('lead')}
+          />
 
-        <div className="mt-12 grid gap-x-12 gap-y-10 lg:grid-cols-[9rem_1fr]">
-          <div className="hidden lg:block" />
-          <div>
-            <a
-              href={`mailto:${site.email}`}
-              className="u-display marks block break-words text-[clamp(1.5rem,4.6vw,2.9rem)] leading-[1.05] no-underline transition-colors duration-200 hover:text-[var(--red-ink)]"
-            >
-              {site.email}
-            </a>
+          <div className="mt-10 max-w-2xl">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <a
+                href={`mailto:${site.email}`}
+                className="u-display block break-words text-[clamp(1.5rem,4vw,2.5rem)] font-bold tracking-tight text-[var(--ink)] no-underline transition-colors duration-200 hover:text-[var(--brand-ink)]"
+              >
+                {site.email}
+              </a>
+              <CopyEmailButton email={site.email} label="Copiar" copiedLabel="Copiado!" />
+            </div>
 
-            <div className="marks mt-9 flex flex-wrap items-center gap-4">
-              <a href={`mailto:${site.email}`} className="plate">
-                {t('cta')}
+            <div className="mt-8 flex flex-wrap items-center gap-3.5">
+              <a href={whatsappHref(t('whatsappMessage'))} target="_blank" rel="noreferrer noopener" className="plate">
+                <WhatsApp size={16} />
+                <span>Conversar no WhatsApp ({site.links.whatsappDisplay})</span>
                 <ArrowRight size={16} />
               </a>
-              {channels.map((channel) => (
+
+              <a
+                href={`mailto:${site.email}`}
+                className="chip u-tag u-tag-ink font-semibold"
+              >
+                {t('cta')}
+                <ArrowOut size={13} />
+              </a>
+
+              {channels.filter(c => c.label !== 'WhatsApp').map((channel) => (
                 <a
                   key={channel.label}
                   href={channel.href}
@@ -54,14 +67,17 @@ export default async function ContactBlock() {
               ))}
             </div>
 
-            <p className="u-label u-label-red marks mt-10 flex items-center gap-2.5 font-medium">
-              <span className="rev-tri" aria-hidden />
-              {t('status')}
-            </p>
-            <p className="u-body marks mt-3 max-w-[54ch] text-[0.9375rem]">{t('note')}</p>
+            <div className="mt-8 flex items-center gap-3">
+              <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+              <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                {t('status')}
+              </p>
+            </div>
+            <p className="mt-2 text-xs text-[var(--ink-3)]">{t('note')}</p>
           </div>
         </div>
       </div>
     </Reveal>
   );
 }
+

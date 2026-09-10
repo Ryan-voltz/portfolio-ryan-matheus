@@ -1,7 +1,7 @@
 {
   "meta": {
-    "titleSuffix": "Sistemas sob medida — CRM, ERP e E-commerce",
-    "description": "Desenvolvedor full-stack que constrói sistemas de gestão sob medida — CRM, ERP, e-commerce e plataformas de compliance. Três deles arquitetados, desenvolvidos e entregues de ponta a ponta, sozinho."
+    "titleSuffix": "Sistemas, Landing Pages e Portfólios — CRM, ERP e E-commerce",
+    "description": "Desenvolvedor full-stack que constrói sistemas de gestão sob medida — CRM, ERP, e-commerce, landing pages de alta conversão e portfólios profissionais. Entregues de ponta a ponta, sozinho."
   },
   "nav": {
     "home": "Ryan Matheus — início",
@@ -9,10 +9,11 @@
     "language": "Idioma",
     "start": "Início",
     "about": "Sobre",
+    "credentials": "Formação",
     "work": "Cases",
     "projects": "Projetos",
     "contact": "Contato",
-    "write": "Escrever"
+    "write": "WhatsApp"
   },
   "common": {
     "skipToContent": "Ir para o conteúdo",
@@ -27,7 +28,14 @@
     "languages": "Idiomas",
     "experience": "Experiência",
     "systems": "Sistemas",
+    "education": "Formação",
     "status": "Status",
+    "livePreview": "Interagir ao vivo",
+    "staticPreview": "Modo preview",
+    "loadingLive": "Carregando site...",
+    "scrollHint": "Role para navegar",
+    "openInNewTab": "Abrir em nova aba",
+    "reload": "Recarregar",
     "stackRole": {
       "react": "Camada de interface",
       "vite": "Build e servidor de desenvolvimento",
@@ -38,7 +46,7 @@
     "close": "Fechar"
   },
   "home": {
-    "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce e plataformas de compliance — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
+    "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce, landing pages de alta conversão e portfólios sob medida — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
     "stage1": "Arquitetura",
     "stage2": "Desenvolvimento",
     "stage3": "Refinamento",
@@ -49,16 +57,31 @@
     "indexLabel": "Detalhes deste conjunto",
     "meta": {
       "experience": "3+ anos",
-      "systems": "08 no ar",
-      "industries": "Varejo · Educação · Serviços",
+      "systems": "08 no ar · Sistemas & Páginas",
+      "industries": "Varejo · Educação · Serviços · Tech",
+      "education": "Tecnólogo em ADS · Anhanguera",
       "status": "Disponível para novos projetos",
       "statusShort": "Disponível"
+    },
+    "credentials": {
+      "gutter": "Credenciais",
+      "heading": "Formação Acadêmica & Certificações",
+      "lead": "Base acadêmica oficial em Análise e Desenvolvimento de Sistemas aliada a certificações técnicas especializadas na entrega de soluções empresariais completas.",
+      "degreeBadge": "Diploma Superior de Tecnologia (MEC)",
+      "degreeTitle": "Análise e Desenvolvimento de Sistemas",
+      "degreeInstitution": "Universidade Anhanguera - Uniderp",
+      "degreeDate": "Graduado · Conclusão em 2025",
+      "degreeAuth": "Diploma Registrado sob nº 128020 · Código de Validação: 671.671.a2aaccd3f06d",
+      "openPdf": "Visualizar Diploma Oficial (PDF)",
+      "certTitle": "Certificações Profissionais (DIO)",
+      "viewCert": "Abrir Certificado (PDF)",
+      "hours": "{count}h de carga horária"
     },
     "about": {
       "gutter": "Notas",
       "heading": "Uma pessoa, a entrega inteira",
       "lead": "De onde eu vim, o que eu construo, e como um sistema sai de um requisito e chega ao handoff.",
-      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce e plataformas de compliance e financeiras — para empresas de varejo, educação e serviços profissionais.",
+      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce, landing pages estratégicas de alta conversão e portfólios institucionais — para empresas de varejo, educação, tecnologia e serviços profissionais.",
       "n2": "Comecei como assistente de TI numa empresa de logística e despacho aduaneiro, trabalhando nos sistemas internos deles. Foi ali que aprendi SQL, PHP, Firebird e Laravel.",
       "n3": "Fundei a Voltz Agency, onde desenvolvo pessoalmente os sistemas principais da empresa, de ponta a ponta. Também aceito projetos freelance selecionados, diretamente.",
       "n4": "Conduzo todo o processo de entrega: levantamento de requisitos e arquitetura do sistema, desenvolvimento acelerado por IA no front-end e no back-end, e refinamento manual — segurança, casos de borda e finalização — antes de cada entrega. Tenho certificação em engenharia de prompt.",

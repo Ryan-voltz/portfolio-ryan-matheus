@@ -23,36 +23,47 @@ type Props = {
  */
 export default function DockedActions({ email, whatsappHref, status, cta, whatsappLabel }: Props) {
   const [shown, setShown] = useState(false);
-  const frame = useRef(0);
 
   useEffect(() => {
-    const read = () => {
-      frame.current = 0;
-      const hero = document.getElementById('top');
-      const past = hero ? hero.getBoundingClientRect().bottom < 0 : window.scrollY > 600;
-      // Stand down over the contact block: its own plate is the action there.
-      const contact = document.getElementById('contact');
-      const atContact = contact ? contact.getBoundingClientRect().top < window.innerHeight * 0.75 : false;
-      setShown(past && !atContact);
+    const hero = document.getElementById('top');
+    const contact = document.getElementById('contact');
+
+    let heroPast = false;
+    let atContact = false;
+
+    const update = () => {
+      setShown(heroPast && !atContact);
     };
-    const onScroll = () => {
-      if (frame.current) return;
-      frame.current = requestAnimationFrame(read);
-    };
-    read();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+
+    const heroObserver = new IntersectionObserver(
+      ([entry]) => {
+        heroPast = !entry.isIntersecting;
+        update();
+      },
+      { threshold: 0.1 }
+    );
+
+    const contactObserver = new IntersectionObserver(
+      ([entry]) => {
+        atContact = entry.isIntersecting;
+        update();
+      },
+      { threshold: 0.15 }
+    );
+
+    if (hero) heroObserver.observe(hero);
+    if (contact) contactObserver.observe(contact);
+
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame.current) cancelAnimationFrame(frame.current);
+      heroObserver.disconnect();
+      contactObserver.disconnect();
     };
   }, []);
 
   return (
     <div className="dock" data-shown={shown} aria-hidden={!shown}>
-      <p className="dock-status u-label u-label-red font-medium" title={status}>
-        <span className="rev-tri" aria-hidden />
+      <p className="dock-status flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400" title={status}>
+        <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" aria-hidden />
         <span className="truncate">{status}</span>
         <span className="sr-only">{status}</span>
       </p>

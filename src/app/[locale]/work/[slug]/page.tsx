@@ -104,7 +104,7 @@ export default async function CasePage({
           <div className="sheet relative py-14 md:py-20">
             <Link
               href="/#work"
-              className="u-label u-label-ink marks inline-flex items-center gap-2.5 no-underline transition-colors duration-200 hover:text-[var(--red-ink)]"
+              className="inline-flex items-center gap-2 rounded-lg border border-[var(--rule)] bg-[var(--card)] px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[var(--ink-2)] transition-all duration-200 hover:border-[var(--brand)] hover:text-[var(--brand-ink)] no-underline shadow-2xs"
             >
               <ArrowLeft size={13} />
               {s('backToSheet')}
@@ -112,12 +112,13 @@ export default async function CasePage({
 
             <div className="mt-10 grid items-end gap-x-12 gap-y-10 lg:grid-cols-[minmax(0,1fr)_auto]">
               <div>
-                <div className="marks flex items-center gap-5">
-                  <span className="callout">
-                    <span>{project.callout}</span>
-                    <span>{project.sheet}</span>
+                <div className="flex items-center gap-3">
+                  <span className="inline-flex items-center rounded-md bg-[var(--brand)]/10 px-2.5 py-1 text-xs font-bold text-[var(--brand-ink)]">
+                    Case {project.callout}
                   </span>
-                  <span className="u-tag">{t('type')}</span>
+                  <span className="text-xs font-medium text-[var(--ink-3)]">
+                    · {t('type')}
+                  </span>
                 </div>
 
                 <h1 className="u-display marks mt-7 text-[clamp(2.5rem,7.6vw,4.75rem)]">
@@ -157,6 +158,7 @@ export default async function CasePage({
                 src={project.shot}
                 alt={t('shotAlt')}
                 caption={`${c('detail')} ${project.callout} — ${project.domain}`}
+                url={project.url}
                 priority
                 sizes="(max-width: 1023px) 100vw, 92vw"
                 expandLabel={c('expand', { name: t('name') })}

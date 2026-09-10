@@ -107,6 +107,8 @@ export async function generateMetadata({
   };
 }
 
+const THEME_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');if(!t){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);if(t==='dark'){document.documentElement.classList.add('dark');}else{document.documentElement.classList.remove('dark');}}catch(e){}})();`;
+
 export default async function LocaleLayout({
   children,
   params,
@@ -119,7 +121,10 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
 
   return (
-    <html lang={localeTags[locale as Locale]} className={`${archivo.variable} ${martian.variable}`}>
+    <html lang={localeTags[locale as Locale]} className={`${archivo.variable} ${martian.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body>
         <div hidden aria-hidden dangerouslySetInnerHTML={{ __html: CONTRACT }} />
         {/* Without JavaScript the reveal observer never runs, so the rules would
@@ -137,3 +142,4 @@ export default async function LocaleLayout({
     </html>
   );
 }
+

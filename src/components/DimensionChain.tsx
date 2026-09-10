@@ -1,5 +1,3 @@
-import { DimArrow } from './Icons';
-
 type Props = {
   stages: string[];
   /** The overall dimension: what the whole span adds up to. */
@@ -7,64 +5,47 @@ type Props = {
 };
 
 /**
- * The claim, drawn instead of asserted: four stages of delivery measured as a
- * dimension chain, with one overall bracket beneath spanning every one of them
- * and carrying a single name. This is the page's thesis and its one device.
+ * Modern corporate delivery pipeline:
+ * Four clear, disciplined phases representing end-to-end full-stack ownership.
  */
 export default function DimensionChain({ stages, spanLabel }: Props) {
   return (
-    <div className="dim">
-      {/* Horizontal chain — the sheet is wide enough to measure across. */}
-      <div className="hidden md:block">
-        <div
-          className="grid"
-          style={{ gridTemplateColumns: `repeat(${stages.length}, minmax(0, 1fr))` }}
-        >
-          {stages.map((stage, i) => (
-            <div key={stage} className="relative pr-px">
-              <div
-                className="dim-span draws"
-                style={{ ['--draw-delay' as string]: `${i * 110}ms` }}
-              >
-                <DimArrow className="absolute left-0 -top-[4px] text-[var(--rule-strong)]" />
-                <DimArrow flip className="absolute right-0 -top-[4px] text-[var(--rule-strong)]" />
-              </div>
-              <p
-                className="u-label u-label-ink marks pt-4"
-                style={{ ['--draw-delay' as string]: `${i * 110}ms` }}
-              >
-                {stage}
-              </p>
+    <div className="w-full">
+      {/* Modern Connected Step Pipeline */}
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:gap-4">
+        {stages.map((stage, i) => (
+          <div
+            key={stage}
+            className="group relative flex flex-col justify-between rounded-xl border border-[var(--rule)] bg-[var(--card)] p-4 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-md"
+          >
+            <div className="flex items-center justify-between">
+              <span className="flex h-6 w-6 items-center justify-center rounded-md bg-[var(--brand)]/10 text-[0.6875rem] font-bold text-[var(--brand-ink)]">
+                0{i + 1}
+              </span>
+              {i < stages.length - 1 && (
+                <span className="hidden text-xs text-[var(--ink-3)]/40 sm:inline">→</span>
+              )}
             </div>
-          ))}
-        </div>
-
-        <div
-          className="dim-bracket draws mt-8"
-          style={{ ['--draw-delay' as string]: `${stages.length * 110 + 120}ms` }}
-        />
-        <p
-          className="u-label u-label-red marks pt-4 font-medium"
-          style={{ ['--draw-delay' as string]: `${stages.length * 110 + 120}ms` }}
-        >
-          {spanLabel}
-        </p>
+            <p className="mt-3 text-sm font-semibold tracking-tight text-[var(--ink)]">
+              {stage}
+            </p>
+          </div>
+        ))}
       </div>
 
-      {/* Vertical chain — the same measurement, turned through 90°. */}
-      <div className="md:hidden">
-        <div className="flex gap-5">
-          <div className="dim-bracket-v shrink-0 self-stretch" aria-hidden />
-          <ol className="min-w-0 flex-1">
-            {stages.map((stage) => (
-              <li key={stage} className="dim-span-v py-3 pl-4">
-                <span className="u-label u-label-ink">{stage}</span>
-              </li>
-            ))}
-          </ol>
+      {/* Signature Guarantee Badge */}
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[var(--brand)]/30 bg-[var(--brand)]/5 px-4 py-3 sm:px-5">
+        <div className="flex items-center gap-2.5">
+          <span className="flex h-2 w-2 rounded-full bg-[var(--brand)] animate-pulse" />
+          <span className="text-xs font-semibold tracking-wide text-[var(--brand-ink)] uppercase">
+            {spanLabel}
+          </span>
         </div>
-        <p className="u-label u-label-red pt-4 font-medium">{spanLabel}</p>
+        <span className="text-xs text-[var(--ink-3)]">
+          Levantamento de requisitos até a homologação final
+        </span>
       </div>
     </div>
   );
 }
+

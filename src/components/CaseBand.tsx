@@ -27,52 +27,46 @@ export default async function CaseBand({
   const mirrored = index % 2 === 1;
 
   return (
-    <Reveal as="article" className="detail group border-t border-[var(--rule)] pt-10 md:pt-14">
-      <div className="grid items-start gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+    <Reveal as="article" className="detail group rounded-2xl border border-[var(--rule)] bg-[var(--card)] p-6 md:p-10 shadow-sm transition-all duration-300 hover:shadow-lg">
+      <div className="grid items-center gap-x-12 gap-y-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)]">
         <div className={`order-2 ${mirrored ? 'lg:order-2' : 'lg:order-1'}`}>
-          <div className="flex items-center gap-4">
-            <span className="callout marks">
-              <span>{project.callout}</span>
-              <span>{project.sheet}</span>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="inline-flex items-center rounded-md bg-[var(--brand)]/10 px-2.5 py-1 text-xs font-bold text-[var(--brand-ink)]">
+              Case 0{index + 1}
             </span>
-            <svg
-              className="leader hidden sm:block"
-              width="132"
-              height="12"
-              viewBox="0 0 132 12"
-              aria-hidden
-              style={{ ['--len' as string]: 150 }}
-            >
-              <path d="M0 6 H120 M112 2 L120 6 L112 10" />
-            </svg>
+            <span className="text-xs font-medium text-[var(--ink-3)]">
+              · {t('type')}
+            </span>
           </div>
 
-          <h3 className="u-h2 marks mt-6" style={{ ['--draw-delay' as string]: '60ms' }}>
+          <h3 className="u-h2 mt-4 text-[clamp(1.75rem,2.2vw,2.5rem)] font-bold tracking-tight text-[var(--ink)]">
             {t('name')}
           </h3>
-          <p className="u-tag marks mt-3" style={{ ['--draw-delay' as string]: '110ms' }}>
-            {t('type')}
-          </p>
 
-          <p
-            className="u-body marks mt-6 max-w-[52ch]"
-            style={{ ['--draw-delay' as string]: '150ms' }}
-          >
+          <p className="mt-4 text-base leading-relaxed text-[var(--ink-2)]">
             {t('summary')}
           </p>
 
-          <dl className="marks mt-8 grid grid-cols-[auto_1fr] gap-x-5 gap-y-2 border-t border-[var(--rule)] pt-5">
-            <dt className="u-label pt-[0.15rem]">{c('stack')}</dt>
-            <dd className="u-num text-[0.75rem] tracking-[0.05em] text-[var(--ink)]">
-              {project.stack.join('  ·  ')}
-            </dd>
-            <dt className="u-label pt-[0.15rem]">{c('drawnBy')}</dt>
-            <dd className="u-num text-[0.75rem] tracking-[0.05em] text-[var(--ink)]">
-              {c('soleAuthor')}
-            </dd>
-          </dl>
+          <div className="mt-6 border-t border-[var(--rule)] pt-5">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--ink-3)]">
+              Tecnologias & Arquitetura
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {project.stack.map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex items-center rounded-lg border border-[var(--rule)] bg-[var(--field)] px-2.5 py-1 text-xs font-medium text-[var(--ink)] shadow-2xs"
+                >
+                  {item}
+                </span>
+              ))}
+              <span className="inline-flex items-center rounded-lg border border-[var(--brand)]/20 bg-[var(--brand)]/5 px-2.5 py-1 text-xs font-semibold text-[var(--brand-ink)]">
+                {c('soleAuthor')}
+              </span>
+            </div>
+          </div>
 
-          <div className="marks mt-8 flex flex-wrap items-center gap-x-7 gap-y-4">
+          <div className="mt-8 flex flex-wrap items-center gap-4">
             <Link href={`/work/${project.slug}`} className="plate">
               {h('viewCase')}
               <ArrowRight size={16} />
@@ -81,10 +75,10 @@ export default async function CaseBand({
               href={project.url}
               target="_blank"
               rel="noreferrer noopener"
-              className="u-link u-num inline-flex items-center gap-2 text-[0.8125rem] tracking-[0.04em]"
+              className="chip font-medium text-xs tracking-wider uppercase"
             >
-              {project.domain}
-              <ArrowOut size={14} />
+              <span>{project.domain}</span>
+              <ArrowOut size={13} />
             </a>
           </div>
         </div>
@@ -94,6 +88,7 @@ export default async function CaseBand({
             src={project.shot}
             alt={t('shotAlt')}
             caption={`${c('detail')} ${project.callout} — ${project.domain}`}
+            url={project.url}
             expandLabel={c('expand', { name: t('name') })}
             closeLabel={c('close')}
             bleed

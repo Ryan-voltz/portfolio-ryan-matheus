@@ -1,14 +1,5 @@
-/** The plotted sheet: its border, four registration ticks, and the bound edge. */
+/** In the modern design, the screen frame border is disabled to let the layout breathe. */
 export default function SheetFrame() {
-  return (
-    <>
-      <div className="sheet-frame" aria-hidden>
-        <span />
-        <span />
-        <span />
-        <span />
-      </div>
-      <div className="margin-line" aria-hidden />
-    </>
-  );
+  return null;
 }
+
