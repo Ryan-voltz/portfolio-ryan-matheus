@@ -58,7 +58,7 @@
     "meta": {
       "experience": "3+ years",
       "systems": "08 live · Systems & Pages",
-      "industries": "Retail · Education · Services · Tech",
+      "industries": "Any sector",
       "education": "B.S. Systems Analysis (ADS)",
       "status": "Available for new projects",
       "statusShort": "Available"
@@ -81,11 +81,14 @@
       "gutter": "Notes",
       "heading": "One person, the whole delivery",
       "lead": "Where I started, what I build, and how a system gets from a requirement to a handoff.",
-      "n1": "I build custom business systems — CRM, ERP, e-commerce, electronic invoicing (NF-e) systems, high-converting landing pages, and corporate portfolios — for companies in retail, education, technology and professional services.",
+      "n1": "I build custom business systems — CRM, ERP, e-commerce, electronic invoicing (NF-e) systems, high-converting landing pages, and corporate portfolios — for companies across any sector.",
       "n2": "I started as an IT assistant at a logistics and customs-brokerage company, working on their internal systems. That is where I learned SQL, PHP, Firebird and Laravel.",
       "n3": "I founded Voltz Agency, where I personally develop the company's flagship systems end to end. I also take on select freelance projects directly.",
       "n4": "I own the full delivery process: requirements and system architecture, AI-accelerated development across front end and back end, and hands-on refinement — security, edge cases and finalization — before every handoff. I hold a certification in prompt engineering.",
       "n5": "I built my own automated auditing tool to test delivered systems end to end.",
+      "n6": "I develop with industry-leading technologies including React, Next.js, modern JavaScript (ES6+), TypeScript, and Python, backed by robust back-ends in Node.js and PHP/Laravel with PostgreSQL and Supabase.",
+      "n7": "I create immersive interfaces and high-impact web experiences using Three.js for real-time 3D rendering and interactive animations, paired with Tailwind CSS and Framer Motion for peak fluidity.",
+      "n8": "I integrate premium AI models and advanced prompt engineering into business workflows, building custom intelligent automations and autonomous agents that scale efficiency.",
       "portraitTag": "To be supplied",
       "portraitNote": "This detail has not been issued yet.",
       "portraitCaption": "Detail D — portrait"
@@ -99,7 +102,7 @@
     "projects": {
       "gutter": "Schedule",
       "heading": "Other projects",
-      "lead": "{count} further systems built for companies in retail, education and auto parts. Every row opens the live site."
+      "lead": "{count} further systems built for companies across diverse sectors. Every row opens the live site."
     }
   },
   "projects": {

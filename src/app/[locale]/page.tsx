@@ -55,7 +55,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const contact = await getTranslations('contact');
   const meta = await getTranslations('meta');
 
-  const notes = ['n1', 'n2', 'n3', 'n4', 'n5'] as const;
+  const notes = ['n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8'] as const;
 
   const stations = [
     { id: 'top', name: nav('start') },

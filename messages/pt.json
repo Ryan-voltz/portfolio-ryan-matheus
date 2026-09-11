@@ -58,7 +58,7 @@
     "meta": {
       "experience": "3+ anos",
       "systems": "08 no ar · Sistemas & Páginas",
-      "industries": "Varejo · Educação · Serviços · Tech",
+      "industries": "Qualquer setor",
       "education": "Tecnólogo em ADS · Anhanguera",
       "status": "Disponível para novos projetos",
       "statusShort": "Disponível"
@@ -81,11 +81,14 @@
       "gutter": "Notas",
       "heading": "Uma pessoa, a entrega inteira",
       "lead": "De onde eu vim, o que eu construo, e como um sistema sai de um requisito e chega ao handoff.",
-      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce, sistemas de emissão de nota fiscal eletrônica (NF-e), landing pages estratégicas de alta conversão e portfólios institucionais — para empresas de varejo, educação, tecnologia e serviços profissionais.",
+      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce, emissão de nota fiscal eletrônica (NF-e), landing pages estratégicas de alta conversão e portfólios institucionais — para empresas de qualquer setor.",
       "n2": "Comecei como assistente de TI numa empresa de logística e despacho aduaneiro, trabalhando nos sistemas internos deles. Foi ali que aprendi SQL, PHP, Firebird e Laravel.",
       "n3": "Fundei a Voltz Agency, onde desenvolvo pessoalmente os sistemas principais da empresa, de ponta a ponta. Também aceito projetos freelance selecionados, diretamente.",
       "n4": "Conduzo todo o processo de entrega: levantamento de requisitos e arquitetura do sistema, desenvolvimento acelerado por IA no front-end e no back-end, e refinamento manual — segurança, casos de borda e finalização — antes de cada entrega. Tenho certificação em engenharia de prompt.",
       "n5": "Construí minha própria ferramenta automatizada de auditoria para testar os sistemas entregues de ponta a ponta.",
+      "n6": "Desenvolvo com tecnologias líderes de mercado como React, Next.js, JavaScript moderno (ES6+), TypeScript e Python, além de back-ends robustos em Node.js e PHP/Laravel integrados a bancos de dados PostgreSQL e Supabase.",
+      "n7": "Crio interfaces imersivas e elementos interativos em Three.js com renderização 3D em tempo real, aliando Tailwind CSS e Framer Motion para fluidez visual, microinterações e máxima performance.",
+      "n8": "Integro inteligências artificiais premium e engenharia de prompts avançada para criar automações inteligentes de processos, agentes autônomos e funcionalidades com IA sob medida para o seu negócio.",
       "portraitTag": "A fornecer",
       "portraitNote": "Este detalhe ainda não foi emitido.",
       "portraitCaption": "Detalhe D — retrato"
@@ -99,7 +102,7 @@
     "projects": {
       "gutter": "Relação",
       "heading": "Outros projetos",
-      "lead": "Mais {count} sistemas construídos para empresas de varejo, educação e autopeças. Cada linha abre o site no ar."
+      "lead": "Mais {count} sistemas construídos para empresas dos mais diversos setores. Cada linha abre o site no ar."
     }
   },
   "projects": {
