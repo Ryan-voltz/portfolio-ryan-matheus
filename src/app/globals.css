@@ -71,22 +71,22 @@
   --plate-ink: #ffffff;
 }
 
-/* Scroll Reveal Animations */
+/* Scroll Reveal Animations. Content is always fully opaque and readable —
+   only position settles, so fast scrolling never shows blank/near-invisible
+   text (matches the .marks rule below, which never fades either). */
 [data-drawn] {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
+  transform: translateY(14px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--draw-delay, 0ms);
+  will-change: transform;
 }
 
 [data-drawn="true"] {
-  opacity: 1;
   transform: translateY(0);
 }
 
 @media (prefers-reduced-motion: reduce) {
   [data-drawn] {
-    opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }

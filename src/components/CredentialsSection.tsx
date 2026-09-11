@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import SectionHead from './SectionHead';
 import { AcademicCap, AwardBadge, ArrowOut } from './Icons';
+import VerifiedSeal from './VerifiedSeal';
+import Reveal from './Reveal';
 
 type CertificateItem = {
   id: string;
@@ -83,7 +85,7 @@ export default async function CredentialsSection() {
 
           <div className="mt-6 grid gap-8 lg:grid-cols-12 lg:items-center">
             {/* Visual preview */}
-            <div className="lg:col-span-5">
+            <div className="relative lg:col-span-5">
               <a
                 href="/docs/diploma-analise-desenvolvimento-sistemas.pdf"
                 target="_blank"
@@ -108,6 +110,11 @@ export default async function CredentialsSection() {
                   </div>
                 </div>
               </a>
+
+              {/* Stamped verification seal, floating over the diploma corner */}
+              <div className="pointer-events-none absolute -top-4 -right-4 flex h-20 w-20 items-center justify-center rounded-full bg-[var(--card)]/80 backdrop-blur-md border border-[var(--rule)]/60 shadow-md">
+                <VerifiedSeal size={72} />
+              </div>
             </div>
 
             {/* Academic details */}
@@ -188,13 +195,13 @@ export default async function CredentialsSection() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {certificates.map((cert) => (
+            {certificates.map((cert, i) => (
+              <Reveal key={cert.id} delayMs={(i % 4) * 90} className="h-full">
               <a
-                key={cert.id}
                 href={cert.pdf}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group flex flex-col justify-between rounded-2xl border border-[var(--rule)] bg-[var(--card)] p-4 shadow-sm transition-all duration-300 hover:border-[var(--brand-ink)] hover:shadow-md"
+                className="group flex h-full flex-col justify-between rounded-2xl border border-[var(--rule)] bg-[var(--card)] p-4 shadow-sm transition-all duration-300 hover:border-[var(--brand-ink)] hover:shadow-md"
               >
                 <div>
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-[var(--rule)] bg-[var(--sheet)]">
@@ -233,6 +240,7 @@ export default async function CredentialsSection() {
                   <ArrowOut size={13} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </a>
+              </Reveal>
             ))}
           </div>
         </div>

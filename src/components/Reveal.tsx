@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, type ElementType, type ReactNode } from 'react';
+import { useEffect, useRef, type CSSProperties, type ElementType, type ReactNode } from 'react';
 
 /**
  * One observer for the whole document, not one per section.
@@ -33,6 +33,8 @@ type Props = {
   as?: ElementType;
   className?: string;
   id?: string;
+  /** Stagger this element's reveal behind its siblings, e.g. for a grid of cards. */
+  delayMs?: number;
 };
 
 /**
@@ -40,7 +42,7 @@ type Props = {
  * readable; only the rules and the labels that sit on them animate in, which
  * is what a drafting pen does — the sheet is never blank.
  */
-export default function Reveal({ children, as, className, id }: Props) {
+export default function Reveal({ children, as, className, id, delayMs }: Props) {
   const Tag = (as ?? 'div') as ElementType;
   const ref = useRef<HTMLElement>(null);
 
@@ -59,7 +61,13 @@ export default function Reveal({ children, as, className, id }: Props) {
   }, []);
 
   return (
-    <Tag ref={ref} id={id} className={className} data-drawn="false">
+    <Tag
+      ref={ref}
+      id={id}
+      className={className}
+      data-drawn="false"
+      style={delayMs ? ({ '--draw-delay': `${delayMs}ms` } as CSSProperties) : undefined}
+    >
       {children}
     </Tag>
   );

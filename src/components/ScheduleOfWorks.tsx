@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { otherProjects } from '@/content/projects';
 import { ArrowOut } from './Icons';
+import Reveal from './Reveal';
 
 /**
  * The bill of materials: everything else on the sheet, one row per system.
@@ -17,12 +18,12 @@ export default async function ScheduleOfWorks() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {otherProjects.map((project, i) => (
+        <Reveal key={project.slug} delayMs={(i % 3) * 90} className="h-full">
         <a
-          key={project.slug}
           href={project.url}
           target="_blank"
           rel="noreferrer noopener"
-          className="group relative flex flex-col justify-between rounded-xl border border-[var(--rule)] bg-[var(--card)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--brand)] hover:shadow-md no-underline"
+          className="group relative flex h-full flex-col justify-between rounded-xl border border-[var(--rule)] bg-[var(--card)] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[var(--brand)] hover:shadow-md no-underline"
         >
           <div>
             {/* Screenshot Header */}
@@ -64,6 +65,7 @@ export default async function ScheduleOfWorks() {
             <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
           </div>
         </a>
+        </Reveal>
       ))}
     </div>
   );
