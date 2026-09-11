@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import { site, whatsappHref } from '@/content/site';
 import { Link } from '@/i18n/navigation';
 import ThemeToggle from '@/components/ThemeToggle';
+import LocaleSwitcher from '@/components/LocaleSwitcher';
 import SheetNav, { type Station } from '@/components/SheetNav';
 import { WhatsApp } from '@/components/Icons';
 
@@ -80,6 +81,8 @@ export default async function Header({ stations }: { stations: Station[] }) {
                   ))}
               </ul>
             </nav>
+
+            <LocaleSwitcher label={t('language')} />
 
             <ThemeToggle />
 

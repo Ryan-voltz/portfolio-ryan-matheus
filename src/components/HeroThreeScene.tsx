@@ -197,8 +197,6 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     let targetRotY = 0.35;
     let currentRotX = 0.15;
     let currentRotY = 0.35;
-    let mouseX = 0;
-    let mouseY = 0;
 
     let isDragging = false;
     let prevMouseX = 0;
@@ -216,21 +214,13 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     };
 
     const handlePointerMove = (e: PointerEvent) => {
-      const rect = container.getBoundingClientRect();
-      mouseX = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      mouseY = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
-
-      if (isDragging) {
-        const deltaX = e.clientX - prevMouseX;
-        const deltaY = e.clientY - prevMouseY;
-        targetRotY += deltaX * 0.006;
-        targetRotX += deltaY * 0.006;
-        prevMouseX = e.clientX;
-        prevMouseY = e.clientY;
-      } else {
-        targetRotY = 0.35 + mouseX * 0.5;
-        targetRotX = 0.15 - mouseY * 0.3;
-      }
+      if (!isDragging) return;
+      const deltaX = e.clientX - prevMouseX;
+      const deltaY = e.clientY - prevMouseY;
+      targetRotY += deltaX * 0.006;
+      targetRotX += deltaY * 0.006;
+      prevMouseX = e.clientX;
+      prevMouseY = e.clientY;
     };
 
     const handlePointerUp = () => {
@@ -328,13 +318,11 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
         pulseVelocity = 0;
       }
 
-      const lerpFactor = prefersReducedMotion ? 0.01 : 0.06;
+      // Only the drag handler above ever changes targetRotX/Y — the laptop
+      // holds still until the visitor actually grabs it.
+      const lerpFactor = prefersReducedMotion ? 0.01 : 0.12;
       currentRotX += (targetRotX - currentRotX) * lerpFactor;
       currentRotY += (targetRotY - currentRotY) * lerpFactor;
-
-      if (!isDragging && !prefersReducedMotion) {
-        targetRotY += 0.0015;
-      }
 
       laptop.rotation.x = currentRotX;
       laptop.rotation.y = currentRotY;
