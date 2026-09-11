@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { site, whatsappHref } from '@/content/site';
-import { Link } from '@/i18n/navigation';
+import HomeLink from '@/components/HomeLink';
 import ThemeToggle from '@/components/ThemeToggle';
 import LocaleSwitcher from '@/components/LocaleSwitcher';
 import SheetNav, { type Station } from '@/components/SheetNav';
@@ -14,10 +14,9 @@ export default async function Header({ stations }: { stations: Station[] }) {
     <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-[var(--sheet)] transition-colors duration-200">
       <div className="sheet">
         <div className="flex h-[var(--bar-h)] items-center justify-between gap-4">
-          <Link
-            href="/"
+          <HomeLink
             className="group flex items-center gap-3 no-underline"
-            aria-label={t('home')}
+            ariaLabel={t('home')}
           >
             {/* Desktop / Tablet: Official Horizontal Logo */}
             <div className="hidden sm:flex items-center">
@@ -62,7 +61,7 @@ export default async function Header({ stations }: { stations: Station[] }) {
             <span className="u-label hidden rounded-md bg-[var(--field)] px-2 py-0.5 md:inline" aria-hidden>
               Full-Stack
             </span>
-          </Link>
+          </HomeLink>
 
           <div className="flex items-center gap-2.5 sm:gap-3 md:gap-4">
             <nav aria-label={t('sections')} className="hidden lg:block">

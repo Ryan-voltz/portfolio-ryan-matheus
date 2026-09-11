@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect } from 'react';
 import { Sun, Moon } from './Icons';
 
 type Props = {
@@ -8,6 +9,26 @@ type Props = {
 };
 
 export default function ThemeToggle({ className, ariaLabel = 'Alternar tema claro/escuro' }: Props) {
+  // Switching locale re-renders the root layout — which owns <html> — for
+  // the new locale param. That wipes the `dark` class and `data-theme`
+  // attribute this component sets imperatively, since neither is part of
+  // <html>'s actual render output; they only ever existed as a DOM mutation
+  // layered on top of it. Re-apply the stored preference every time this
+  // component (re)mounts so a locale switch can't silently revert the
+  // reader's theme choice back to the OS/browser default.
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('theme');
+      const theme = stored === 'light' || stored === 'dark'
+        ? stored
+        : window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.classList.toggle('dark', theme === 'dark');
+    } catch {
+      // localStorage may be disabled
+    }
+  }, []);
+
   const toggle = () => {
     const isDark = document.documentElement.classList.contains('dark');
     const next = isDark ? 'light' : 'dark';
