@@ -10,7 +10,7 @@ export const site = {
   headline: 'Full-Stack Developer — CRM/ERP, E-commerce, Landing Pages & Portfolios',
   email: 'ryan.voltzagency@gmail.com',
   domain: 'ryanmatheus.com.br',
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? 'https://ryanmatheus.com.br',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://ryanmatheus.com.br',
 
   /** Drawing metadata rendered in the cartouche and the title block. */
   drawingNumber: 'RM-2026',
