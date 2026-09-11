@@ -1,7 +1,7 @@
 {
   "meta": {
     "titleSuffix": "Sistemas, Landing Pages e Portfólios — CRM, ERP e E-commerce",
-    "description": "Desenvolvedor full-stack que constrói sistemas de gestão sob medida — CRM, ERP, e-commerce, landing pages de alta conversão e portfólios profissionais. Entregues de ponta a ponta, sozinho."
+    "description": "Desenvolvedor full-stack que constrói CRM, ERP, e-commerce e sistemas de gestão sob medida — projetados, construídos e entregues de ponta a ponta, sozinho."
   },
   "nav": {
     "home": "Ryan Matheus — início",
@@ -46,7 +46,7 @@
     "close": "Fechar"
   },
   "home": {
-    "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce, landing pages de alta conversão e portfólios sob medida — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
+    "lead": "Eu construo os sistemas que sustentam a operação das empresas — CRM, ERP, e-commerce, sistemas de emissão de nota fiscal eletrônica (NF-e), landing pages de alta conversão e portfólios sob medida — e conduzo pessoalmente todas as etapas da entrega: levantamento e arquitetura, front-end e back-end, refinamento e handoff.",
     "stage1": "Arquitetura",
     "stage2": "Desenvolvimento",
     "stage3": "Refinamento",
@@ -81,7 +81,7 @@
       "gutter": "Notas",
       "heading": "Uma pessoa, a entrega inteira",
       "lead": "De onde eu vim, o que eu construo, e como um sistema sai de um requisito e chega ao handoff.",
-      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce, landing pages estratégicas de alta conversão e portfólios institucionais — para empresas de varejo, educação, tecnologia e serviços profissionais.",
+      "n1": "Construo sistemas de gestão sob medida — CRM, ERP, e-commerce, sistemas de emissão de nota fiscal eletrônica (NF-e), landing pages estratégicas de alta conversão e portfólios institucionais — para empresas de varejo, educação, tecnologia e serviços profissionais.",
       "n2": "Comecei como assistente de TI numa empresa de logística e despacho aduaneiro, trabalhando nos sistemas internos deles. Foi ali que aprendi SQL, PHP, Firebird e Laravel.",
       "n3": "Fundei a Voltz Agency, onde desenvolvo pessoalmente os sistemas principais da empresa, de ponta a ponta. Também aceito projetos freelance selecionados, diretamente.",
       "n4": "Conduzo todo o processo de entrega: levantamento de requisitos e arquitetura do sistema, desenvolvimento acelerado por IA no front-end e no back-end, e refinamento manual — segurança, casos de borda e finalização — antes de cada entrega. Tenho certificação em engenharia de prompt.",
@@ -153,7 +153,7 @@
         "d3": "Supabase como camada de dados, autenticação e API.",
         "d4": "Arquitetura, front-end, back-end, refinamento e publicação — desenvolvido por mim, sozinho, 100%."
       },
-      "result": ""
+      "result": "O Voltz Hub não é vendido — é a ferramenta com a qual a Voltz Agency roda a própria operação, então não há métrica externa para reportar. O que mudou é qualitativo: o controle de tarefas e de projetos, que antes vivia espalhado entre planilhas e conversas de chat, agora roda em um único produto, com um único modelo de dados por trás dos dois."
     },
     "blumenns": {
       "name": "Blumenns",
@@ -168,7 +168,7 @@
         "d3": "React e Vite tanto na loja quanto no painel.",
         "d4": "Arquitetura, desenvolvimento, refinamento e entrega — desenvolvido por mim, sozinho, 100%."
       },
-      "result": ""
+      "result": "Não há números de vendas ou de tráfego sendo acompanhados aqui, então nenhum é reportado. O que mudou é qualitativo: antes desse projeto, atualizar o catálogo significava pedir para um desenvolvedor mexer no código. Agora isso é feito de dentro do painel administrativo autenticado — criando, precificando e retirando peças sem tocar em uma linha de código."
     }
   },
   "sheet": {

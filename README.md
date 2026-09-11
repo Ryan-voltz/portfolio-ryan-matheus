@@ -64,32 +64,23 @@ have identical shapes — if you add a key, add it to all three.
 
 Structured data (URLs, stacks, screenshots, sheet numbers) is in
 `src/content/projects.ts`. Brand constants (name, headline, email, links, revision) are in
-`src/content/site.ts`.
+`src/content/site.ts`. Certificates and the diploma shown in the credentials section are
+hardcoded in `src/components/CredentialsSection.tsx` (not in `src/content/*.ts`) — add or
+edit an entry there, plus the matching image in `public/certificates/` and PDF in
+`public/docs/`.
 
-### ⚠ Placeholders waiting on you
+### Results
 
-Two visible redline notes ship on purpose, because no result was supplied and none was
-invented:
+All three featured cases now state a result. None carries an invented number — Voltz Hub
+and Blumenns describe what changed qualitatively (no external metric exists for either:
+Voltz Hub isn't sold, and Blumenns doesn't track sales/traffic here), the same way
+`/work/volare` already did. If a real figure becomes available later, edit
+`work.<slug>.result` in all three message files — no other change is needed, since
+`src/content/projects.ts` already has that project's `result` field set to `'qualitative'`.
 
-| Where | Key to edit |
-|---|---|
-| `/work/voltz-hub` → Result | `work.voltz-hub.result` in all three message files |
-| `/work/blumenns` → Result | `work.blumenns.result` in all three message files |
-
-Write the real outcome into those keys and the redline note is replaced automatically —
-`src/content/projects.ts` decides which of the two renders by the project's `result` field,
-so also change `result: 'pending'` to `result: 'qualitative'` for that project.
-
-`/work/volare` already states its result honestly: the platform is newly launched, has no
-figures yet, and says so.
-
-### ⚠ Portrait
-
-The About section shows a "to be supplied" mount. To fill it:
-
-1. Drop a **4:5** image at `public/portrait.jpg`.
-2. In `src/app/[locale]/page.tsx`, replace the placeholder `<div className="mount …">`
-   block with a `next/image` inside the same `.mount` wrapper.
+The portrait, certificates, diploma, hero 3D scene and the live-site sandbox on each case
+page all shipped after the sections above were first written — the placeholders they used
+to require are gone. What's still open is only the results table above.
 
 ---
 

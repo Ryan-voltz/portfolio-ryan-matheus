@@ -1,7 +1,7 @@
 {
   "meta": {
     "titleSuffix": "Business Systems, Landing Pages & Portfolios — CRM, ERP & E-commerce",
-    "description": "Full-stack developer building custom business systems — CRM, ERP, e-commerce, high-converting landing pages, and institutional portfolios. Designed, built, and delivered end to end, alone."
+    "description": "Full-stack developer building custom CRM, ERP, e-commerce and business systems — designed, built and delivered end to end, alone."
   },
   "nav": {
     "home": "Ryan Matheus — home",
@@ -46,7 +46,7 @@
     "close": "Close"
   },
   "home": {
-    "lead": "I build the systems and pages companies run on — CRM, ERP, e-commerce, high-converting landing pages, and bespoke portfolios — and I own every stage of the delivery myself: requirements and architecture, front end and back end, hardening, and the handoff.",
+    "lead": "I build the systems and pages companies run on — CRM, ERP, e-commerce, electronic invoicing (NF-e) systems, high-converting landing pages, and bespoke portfolios — and I own every stage of the delivery myself: requirements and architecture, front end and back end, hardening, and the handoff.",
     "stage1": "Architecture",
     "stage2": "Build",
     "stage3": "Hardening",
@@ -81,7 +81,7 @@
       "gutter": "Notes",
       "heading": "One person, the whole delivery",
       "lead": "Where I started, what I build, and how a system gets from a requirement to a handoff.",
-      "n1": "I build custom business systems — CRM, ERP, e-commerce, high-converting landing pages, and corporate portfolios — for companies in retail, education, technology and professional services.",
+      "n1": "I build custom business systems — CRM, ERP, e-commerce, electronic invoicing (NF-e) systems, high-converting landing pages, and corporate portfolios — for companies in retail, education, technology and professional services.",
       "n2": "I started as an IT assistant at a logistics and customs-brokerage company, working on their internal systems. That is where I learned SQL, PHP, Firebird and Laravel.",
       "n3": "I founded Voltz Agency, where I personally develop the company's flagship systems end to end. I also take on select freelance projects directly.",
       "n4": "I own the full delivery process: requirements and system architecture, AI-accelerated development across front end and back end, and hands-on refinement — security, edge cases and finalization — before every handoff. I hold a certification in prompt engineering.",
@@ -153,7 +153,7 @@
         "d3": "Supabase as the data, authentication and API layer.",
         "d4": "Architecture, front end, back end, hardening and release — developed by me alone, 100%."
       },
-      "result": ""
+      "result": "Voltz Hub isn't sold — it's the product Voltz Agency runs its own operation on, so there's no external metric to report. What changed is qualitative: task tracking and project tracking, which used to live across spreadsheets and chat threads, now run from one product with a single data model behind both."
     },
     "blumenns": {
       "name": "Blumenns",
@@ -168,7 +168,7 @@
         "d3": "React and Vite across both the storefront and the admin panel.",
         "d4": "Architecture, build, hardening and handoff — developed by me alone, 100%."
       },
-      "result": ""
+      "result": "No sales or traffic figures are tracked here, so none are reported. What changed is qualitative: before this build, updating the catalogue meant asking a developer to edit code. Now it's done from inside the authenticated admin panel — creating, pricing and retiring pieces without touching a single line."
     }
   },
   "sheet": {

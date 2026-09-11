@@ -58,7 +58,7 @@ export const featuredProjects: FeaturedProject[] = [
     domain: 'voltzhub.com.br',
     stack: ['React', 'Vite', 'Supabase', 'Framer Motion'],
     shot: '/shots/voltz-hub.webp',
-    result: 'pending',
+    result: 'qualitative',
   },
   {
     slug: 'blumenns',
@@ -68,7 +68,7 @@ export const featuredProjects: FeaturedProject[] = [
     domain: 'blumenns.com',
     stack: ['React', 'Vite'],
     shot: '/shots/blumenns.webp',
-    result: 'pending',
+    result: 'qualitative',
   },
 ];
 
