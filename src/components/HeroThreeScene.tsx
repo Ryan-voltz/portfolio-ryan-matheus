@@ -7,6 +7,11 @@ interface HeroThreeSceneProps {
   className?: string;
 }
 
+/**
+ * A blueprint-wireframe laptop that assembles itself on mount — the base pops
+ * in, then the screen swings open — before settling into the same drag/pulse
+ * interaction the rest of the hero has always had.
+ */
 export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
   const mountRef = useRef<HTMLDivElement>(null);
   const [isInteracting, setIsInteracting] = useState(false);
@@ -15,19 +20,16 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     const container = mountRef.current;
     if (!container) return;
 
-    // Check motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Dimensions
     let width = container.clientWidth || 360;
     let height = container.clientHeight || 360;
 
-    // Scene & Camera
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-    camera.position.z = 5.2;
+    camera.position.set(0, 0.35, 6.4);
+    camera.lookAt(0, 0.15, 0);
 
-    // WebGL Renderer with alpha transparency
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true,
@@ -37,130 +39,171 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // Theme color helper
     const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
-
     const getColors = () => {
       const dark = isDark();
       return {
-        outer: dark ? 0x38bdf8 : 0x0284c7, // Cyan-400 / Sky-600
-        inner: dark ? 0x60a5fa : 0x2563eb, // Blue-400 / Blue-600
-        nodes: dark ? 0x34d399 : 0x059669, // Emerald-400 / Emerald-600
-        particles: dark ? 0x93c5fd : 0x475569, // Light blue / Slate
-        glow: dark ? 0x0284c7 : 0x93c5fd,
+        chassis: dark ? 0x38bdf8 : 0x0284c7,
+        screenFrame: dark ? 0x60a5fa : 0x2563eb,
+        glass: dark ? 0x3b82f6 : 0x2563eb,
+        ui: dark ? 0x34d399 : 0x059669,
+        particles: dark ? 0x93c5fd : 0x475569,
       };
     };
-
     let colors = getColors();
 
     // -------------------------------------------------------------------------
-    // 1. 3D Architectural Blueprint Objects
+    // 1. The laptop — base, hinge and screen, built from primitives.
     // -------------------------------------------------------------------------
-    const rootGroup = new THREE.Group();
-    scene.add(rootGroup);
+    const laptop = new THREE.Group();
+    scene.add(laptop);
 
-    // Outer Geodesic Icosahedron Wireframe
-    const outerGeo = new THREE.IcosahedronGeometry(1.6, 2);
-    const wireframeGeo = new THREE.WireframeGeometry(outerGeo);
-    const outerLineMat = new THREE.LineBasicMaterial({
-      color: colors.outer,
+    // Base (keyboard deck)
+    const baseGroup = new THREE.Group();
+    baseGroup.position.y = -0.42;
+    laptop.add(baseGroup);
+
+    const baseW = 2.7;
+    const baseD = 1.7;
+    const baseGeo = new THREE.BoxGeometry(baseW, 0.12, baseD);
+    const baseEdges = new THREE.EdgesGeometry(baseGeo);
+    const chassisMat = new THREE.LineBasicMaterial({ color: colors.chassis, transparent: true, opacity: 0.8 });
+    const baseMesh = new THREE.LineSegments(baseEdges, chassisMat);
+    baseGroup.add(baseMesh);
+
+    // Keyboard grid, inset on the deck's top face
+    const kbGrid = new THREE.GridHelper(baseW * 0.72, 8, colors.ui, colors.chassis);
+    (kbGrid.material as THREE.Material).transparent = true;
+    (kbGrid.material as THREE.Material).opacity = 0.35;
+    kbGrid.scale.z = (baseD * 0.6) / (baseW * 0.72);
+    kbGrid.position.set(0, 0.065, 0.08);
+    baseGroup.add(kbGrid);
+
+    // Trackpad outline
+    const padShape: THREE.Vector3[] = [
+      new THREE.Vector3(-0.42, 0.065, 0.58),
+      new THREE.Vector3(0.42, 0.065, 0.58),
+      new THREE.Vector3(0.42, 0.065, 0.78),
+      new THREE.Vector3(-0.42, 0.065, 0.78),
+      new THREE.Vector3(-0.42, 0.065, 0.58),
+    ];
+    const padGeo = new THREE.BufferGeometry().setFromPoints(padShape);
+    const padMat = new THREE.LineBasicMaterial({ color: colors.ui, transparent: true, opacity: 0.55 });
+    baseGroup.add(new THREE.Line(padGeo, padMat));
+
+    // Screen, pivoting from the hinge edge at the back of the base
+    const screenPivot = new THREE.Group();
+    screenPivot.position.set(0, -0.36, -baseD / 2);
+    laptop.add(screenPivot);
+
+    const screenW = 2.7;
+    const screenH = 1.68;
+    const screenGeo = new THREE.BoxGeometry(screenW, screenH, 0.08).translate(0, screenH / 2, 0);
+    const screenEdges = new THREE.EdgesGeometry(screenGeo);
+    const screenFrameMat = new THREE.LineBasicMaterial({ color: colors.screenFrame, transparent: true, opacity: 0.85 });
+    const screenFrame = new THREE.LineSegments(screenEdges, screenFrameMat);
+    screenPivot.add(screenFrame);
+
+    // Glowing "glass" panel, inset within the frame
+    const glassGeo = new THREE.PlaneGeometry(screenW * 0.88, screenH * 0.85).translate(0, screenH * 0.52, 0.045);
+    const glassMat = new THREE.MeshBasicMaterial({
+      color: colors.glass,
       transparent: true,
-      opacity: 0.55,
-      linewidth: 1,
+      opacity: 0.12,
+      side: THREE.DoubleSide,
     });
-    const outerMesh = new THREE.LineSegments(wireframeGeo, outerLineMat);
-    rootGroup.add(outerMesh);
+    const glass = new THREE.Mesh(glassGeo, glassMat);
+    screenPivot.add(glass);
 
-    // Outer Vertex Nodes (Points)
-    const nodeMat = new THREE.PointsMaterial({
-      color: colors.nodes,
-      size: 0.05,
-      transparent: true,
-      opacity: 0.85,
+    // A handful of "interface" lines on the glass — reads as an editor/dashboard
+    const uiLines: THREE.Line[] = [];
+    const uiLineWidths = [0.78, 0.56, 0.68, 0.4, 0.6];
+    uiLineWidths.forEach((w, i) => {
+      const yLocal = screenH * 0.88 - i * 0.2;
+      const pts = [
+        new THREE.Vector3(-screenW * 0.36, yLocal, 0.05),
+        new THREE.Vector3(-screenW * 0.36 + w, yLocal, 0.05),
+      ];
+      const geo = new THREE.BufferGeometry().setFromPoints(pts);
+      const mat = new THREE.LineBasicMaterial({
+        color: i === 0 ? colors.ui : colors.screenFrame,
+        transparent: true,
+        opacity: 0.7,
+      });
+      const line = new THREE.Line(geo, mat);
+      screenPivot.add(line);
+      uiLines.push(line);
     });
-    const outerNodes = new THREE.Points(outerGeo, nodeMat);
-    rootGroup.add(outerNodes);
 
-    // Inner Concentric Gyroscope Rings (Core Engine)
-    const innerRingGeo1 = new THREE.TorusGeometry(0.95, 0.015, 16, 64);
-    const ringMat1 = new THREE.MeshBasicMaterial({
-      color: colors.inner,
-      transparent: true,
-      opacity: 0.7,
-      wireframe: true,
-    });
-    const innerRing1 = new THREE.Mesh(innerRingGeo1, ringMat1);
-    rootGroup.add(innerRing1);
+    // Webcam dot
+    const camDotGeo = new THREE.CircleGeometry(0.02, 16).translate(0, screenH - 0.08, 0.05);
+    const camDotMat = new THREE.MeshBasicMaterial({ color: colors.ui, transparent: true, opacity: 0.9 });
+    screenPivot.add(new THREE.Mesh(camDotGeo, camDotMat));
 
-    const innerRingGeo2 = new THREE.TorusGeometry(0.7, 0.015, 16, 64);
-    const ringMat2 = new THREE.MeshBasicMaterial({
-      color: colors.outer,
-      transparent: true,
-      opacity: 0.5,
-      wireframe: true,
-    });
-    const innerRing2 = new THREE.Mesh(innerRingGeo2, ringMat2);
-    innerRing2.rotation.x = Math.PI / 2;
-    rootGroup.add(innerRing2);
+    // Hinge angles: closed = screen lying flat over the keyboard; open = tilted back.
+    const CLOSED_ANGLE = Math.PI / 2;
+    const OPEN_ANGLE = -0.12 * Math.PI;
+    screenPivot.rotation.x = CLOSED_ANGLE;
 
-    // Central Floating Tech Core (Octahedron)
-    const coreGeo = new THREE.OctahedronGeometry(0.4, 0);
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: colors.nodes,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.8,
-    });
-    const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-    rootGroup.add(coreMesh);
-
-    // Ambient Orbiting Particles Cloud
-    const particleCount = 80;
+    // Ambient orbiting particle cloud, echoing the rest of the hero's blueprint motif
+    const particleCount = 60;
     const particleGeo = new THREE.BufferGeometry();
     const particlePositions = new Float32Array(particleCount * 3);
     const particleSpeeds = new Float32Array(particleCount * 3);
-
     for (let i = 0; i < particleCount; i++) {
-      const radius = 1.9 + Math.random() * 0.9;
+      const radius = 2.1 + Math.random() * 1.0;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-
       particlePositions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      particlePositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+      particlePositions[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta) * 0.6;
       particlePositions[i * 3 + 2] = radius * Math.cos(phi);
-
       particleSpeeds[i * 3] = (Math.random() - 0.5) * 0.003;
       particleSpeeds[i * 3 + 1] = (Math.random() - 0.5) * 0.003;
       particleSpeeds[i * 3 + 2] = (Math.random() - 0.5) * 0.003;
     }
     particleGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
-
     const particleMat = new THREE.PointsMaterial({
       color: colors.particles,
-      size: 0.035,
+      size: 0.032,
       transparent: true,
-      opacity: 0.65,
+      opacity: 0,
     });
     const particleCloud = new THREE.Points(particleGeo, particleMat);
-    rootGroup.add(particleCloud);
+    scene.add(particleCloud);
 
     // -------------------------------------------------------------------------
-    // 2. Physics, Inertia & Mouse Tracking
+    // 2. Assemble-on-mount animation state
     // -------------------------------------------------------------------------
-    let targetRotX = 0.2;
-    let targetRotY = 0.3;
-    let currentRotX = 0.2;
-    let currentRotY = 0.3;
+    laptop.scale.setScalar(prefersReducedMotion ? 1 : 0.001);
+    laptop.position.y = prefersReducedMotion ? 0 : -0.5;
+    let assembleT = prefersReducedMotion ? 1 : 0;
+    const ASSEMBLE_DURATION = 1.9; // seconds
+    const easeOutBack = (t: number) => {
+      const c1 = 1.70158;
+      const c3 = c1 + 1;
+      return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
+    };
+    const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+    if (prefersReducedMotion) {
+      screenPivot.rotation.x = OPEN_ANGLE;
+      particleMat.opacity = 0.6;
+    }
+
+    // -------------------------------------------------------------------------
+    // 3. Physics, inertia & pointer tracking (drag to rotate, click to pulse)
+    // -------------------------------------------------------------------------
+    let targetRotX = 0.15;
+    let targetRotY = 0.35;
+    let currentRotX = 0.15;
+    let currentRotY = 0.35;
     let mouseX = 0;
     let mouseY = 0;
 
     let isDragging = false;
     let prevMouseX = 0;
     let prevMouseY = 0;
-    let dragVelocityX = 0;
-    let dragVelocityY = 0;
 
-    // Pulse wave physics on click
     let pulseScale = 1;
     let pulseVelocity = 0;
 
@@ -169,7 +212,7 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
       setIsInteracting(true);
       prevMouseX = e.clientX;
       prevMouseY = e.clientY;
-      pulseVelocity = 0.08; // trigger spring pulse
+      pulseVelocity = 1.1;
     };
 
     const handlePointerMove = (e: PointerEvent) => {
@@ -180,15 +223,13 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
       if (isDragging) {
         const deltaX = e.clientX - prevMouseX;
         const deltaY = e.clientY - prevMouseY;
-        dragVelocityX = deltaX * 0.006;
-        dragVelocityY = deltaY * 0.006;
-        targetRotY += dragVelocityX;
-        targetRotX += dragVelocityY;
+        targetRotY += deltaX * 0.006;
+        targetRotX += deltaY * 0.006;
         prevMouseX = e.clientX;
         prevMouseY = e.clientY;
       } else {
-        targetRotY = mouseX * 0.7;
-        targetRotX = -mouseY * 0.7;
+        targetRotY = 0.35 + mouseX * 0.5;
+        targetRotX = 0.15 - mouseY * 0.3;
       }
     };
 
@@ -202,29 +243,29 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     window.addEventListener('pointerup', handlePointerUp);
 
     // -------------------------------------------------------------------------
-    // 3. Theme Mutation Observer
+    // 4. Theme mutation observer
     // -------------------------------------------------------------------------
     const updateThemeColors = () => {
       colors = getColors();
-      outerLineMat.color.setHex(colors.outer);
-      nodeMat.color.setHex(colors.nodes);
-      ringMat1.color.setHex(colors.inner);
-      ringMat2.color.setHex(colors.outer);
-      coreMat.color.setHex(colors.nodes);
+      chassisMat.color.setHex(colors.chassis);
+      screenFrameMat.color.setHex(colors.screenFrame);
+      glassMat.color.setHex(colors.glass);
+      padMat.color.setHex(colors.ui);
+      camDotMat.color.setHex(colors.ui);
       particleMat.color.setHex(colors.particles);
+      uiLines.forEach((line, i) => {
+        (line.material as THREE.LineBasicMaterial).color.setHex(i === 0 ? colors.ui : colors.screenFrame);
+      });
     };
-
     const themeObserver = new MutationObserver((mutations) => {
       for (const mutation of mutations) {
-        if (mutation.attributeName === 'data-theme') {
-          updateThemeColors();
-        }
+        if (mutation.attributeName === 'data-theme') updateThemeColors();
       }
     });
     themeObserver.observe(document.documentElement, { attributes: true });
 
     // -------------------------------------------------------------------------
-    // 4. Resize Handling
+    // 5. Resize handling
     // -------------------------------------------------------------------------
     const handleResize = () => {
       if (!container) return;
@@ -234,85 +275,95 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
       camera.updateProjectionMatrix();
       renderer.setSize(width, height);
     };
-
     const resizeObserver = new ResizeObserver(handleResize);
     resizeObserver.observe(container);
 
     // -------------------------------------------------------------------------
-    // 5. Visibility / Intersection Observer (Pause when offscreen)
+    // 6. Visibility — pause when off-screen
     // -------------------------------------------------------------------------
     let isVisible = true;
     const visibilityObserver = new IntersectionObserver(
-      ([entry]) => {
-        isVisible = entry.isIntersecting;
-      },
-      { threshold: 0.05 }
+      ([entry]) => { isVisible = entry.isIntersecting; },
+      { threshold: 0.05 },
     );
     visibilityObserver.observe(container);
 
     // -------------------------------------------------------------------------
-    // 6. Animation Loop
+    // 7. Animation loop
     // -------------------------------------------------------------------------
     let animId: number;
-    let clock = new THREE.Clock();
+    const clock = new THREE.Clock();
 
     const animate = () => {
       animId = requestAnimationFrame(animate);
-
       if (!isVisible) return;
 
-      const delta = clock.getDelta();
+      // Clamp delta: a backgrounded/throttled tab (e.g. mid-screenshot in a
+      // headless harness) can hand back a multi-second gap, which would
+      // otherwise spike the spring below into a single-frame runaway.
+      const delta = Math.min(clock.getDelta(), 0.1);
       const elapsed = clock.getElapsedTime();
 
-      // Inertial spring for pulse
-      if (pulseVelocity !== 0 || pulseScale !== 1) {
-        const springForce = (1 - pulseScale) * 12;
-        pulseVelocity += springForce * delta;
-        pulseVelocity *= 0.9;
-        pulseScale += pulseVelocity;
-        rootGroup.scale.set(pulseScale, pulseScale, pulseScale);
+      // Assemble-on-mount: pop the chassis in, then swing the screen open.
+      if (assembleT < 1) {
+        assembleT = Math.min(1, assembleT + delta / ASSEMBLE_DURATION);
+        const popT = Math.min(1, assembleT / 0.6);
+        laptop.scale.setScalar(Math.max(0.001, easeOutBack(popT)));
+        laptop.position.y = THREE.MathUtils.lerp(-0.5, 0, easeOutCubic(popT));
+
+        const openT = Math.max(0, Math.min(1, (assembleT - 0.35) / 0.65));
+        screenPivot.rotation.x = THREE.MathUtils.lerp(CLOSED_ANGLE, OPEN_ANGLE, easeOutCubic(openT));
+
+        particleMat.opacity = 0.6 * easeOutCubic(Math.max(0, (assembleT - 0.5) / 0.5));
       }
 
-      // Smooth lerp rotation toward target
-      const lerpFactor = prefersReducedMotion ? 0.01 : 0.05;
+      if (Math.abs(pulseVelocity) > 0.0005 || Math.abs(pulseScale - 1) > 0.0005) {
+        const springForce = (1 - pulseScale) * 90;
+        const damping = 12;
+        pulseVelocity += (springForce - damping * pulseVelocity) * delta;
+        pulseScale += pulseVelocity * delta;
+        pulseScale = THREE.MathUtils.clamp(pulseScale, 0.7, 1.3);
+      } else {
+        pulseScale = 1;
+        pulseVelocity = 0;
+      }
+
+      const lerpFactor = prefersReducedMotion ? 0.01 : 0.06;
       currentRotX += (targetRotX - currentRotX) * lerpFactor;
       currentRotY += (targetRotY - currentRotY) * lerpFactor;
 
-      // Base gentle continuous rotation if not dragging
       if (!isDragging && !prefersReducedMotion) {
-        targetRotY += 0.003;
+        targetRotY += 0.0015;
       }
 
-      rootGroup.rotation.x = currentRotX;
-      rootGroup.rotation.y = currentRotY;
+      laptop.rotation.x = currentRotX;
+      laptop.rotation.y = currentRotY;
+      const finalScale = (assembleT < 1 ? laptop.scale.x : 1) * pulseScale;
+      laptop.scale.setScalar(Math.max(0.001, finalScale));
 
-      // Concentric rings differential rotation
-      innerRing1.rotation.x += 0.01;
-      innerRing1.rotation.y += 0.008;
-      innerRing2.rotation.y += 0.012;
-      innerRing2.rotation.z += 0.007;
-
-      // Core pulsing rotation
-      coreMesh.rotation.x = -elapsed * 0.5;
-      coreMesh.rotation.y = elapsed * 0.8;
-
-      // Particle subtle drifting
+      // Gentle drift on the ambient particles
       const positions = particleGeo.attributes.position.array as Float32Array;
       for (let i = 0; i < particleCount; i++) {
         positions[i * 3] += particleSpeeds[i * 3];
         positions[i * 3 + 1] += particleSpeeds[i * 3 + 1];
         positions[i * 3 + 2] += particleSpeeds[i * 3 + 2];
-
-        // Boundary reflection
         const distSq =
           positions[i * 3] ** 2 + positions[i * 3 + 1] ** 2 + positions[i * 3 + 2] ** 2;
-        if (distSq > 9 || distSq < 2) {
+        if (distSq > 12 || distSq < 3) {
           particleSpeeds[i * 3] *= -1;
           particleSpeeds[i * 3 + 1] *= -1;
           particleSpeeds[i * 3 + 2] *= -1;
         }
       }
       particleGeo.attributes.position.needsUpdate = true;
+
+      // The UI lines on screen breathe gently once the laptop has opened
+      if (assembleT >= 1 && !prefersReducedMotion) {
+        uiLines.forEach((line, i) => {
+          const mat = line.material as THREE.LineBasicMaterial;
+          mat.opacity = 0.55 + Math.sin(elapsed * 1.4 + i) * 0.15;
+        });
+      }
 
       renderer.render(scene, camera);
     };
@@ -331,17 +382,24 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
       resizeObserver.disconnect();
       visibilityObserver.disconnect();
 
-      // Geometries & Materials dispose
-      outerGeo.dispose();
-      wireframeGeo.dispose();
-      outerLineMat.dispose();
-      nodeMat.dispose();
-      innerRingGeo1.dispose();
-      ringMat1.dispose();
-      innerRingGeo2.dispose();
-      ringMat2.dispose();
-      coreGeo.dispose();
-      coreMat.dispose();
+      baseGeo.dispose();
+      baseEdges.dispose();
+      chassisMat.dispose();
+      (kbGrid.geometry as THREE.BufferGeometry).dispose();
+      (kbGrid.material as THREE.Material).dispose();
+      padGeo.dispose();
+      padMat.dispose();
+      screenGeo.dispose();
+      screenEdges.dispose();
+      screenFrameMat.dispose();
+      glassGeo.dispose();
+      glassMat.dispose();
+      uiLines.forEach((line) => {
+        line.geometry.dispose();
+        (line.material as THREE.Material).dispose();
+      });
+      camDotGeo.dispose();
+      camDotMat.dispose();
       particleGeo.dispose();
       particleMat.dispose();
       renderer.dispose();
@@ -354,18 +412,16 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
 
   return (
     <div className={`relative flex flex-col items-center justify-center select-none ${className ?? ''}`}>
-      {/* Three.js Canvas Container */}
       <div
         ref={mountRef}
         className="relative h-full w-full cursor-grab active:cursor-grabbing touch-none"
         title="Elemento 3D Interativo: arraste para rotacionar, clique para pulsar"
       />
 
-      {/* Senior UI Blueprint Tag & Micro-controls */}
       <div className="pointer-events-none absolute bottom-3 left-3 right-3 flex items-center justify-between text-[0.625rem] font-mono tracking-wider text-[var(--ink-3)]">
         <div className="flex items-center gap-1.5 rounded-md bg-[var(--card)]/80 backdrop-blur-md px-2 py-1 border border-[var(--rule)]/60 shadow-sm">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--brand)] animate-pulse" />
-          <span className="uppercase font-semibold text-[var(--ink)]">3D Blueprint Core</span>
+          <span className="uppercase font-semibold text-[var(--ink)]">Blueprint Workstation</span>
         </div>
 
         <div className="hidden sm:flex items-center gap-2 rounded-md bg-[var(--card)]/80 backdrop-blur-md px-2 py-1 border border-[var(--rule)]/60 shadow-sm">
@@ -375,4 +431,3 @@ export default function HeroThreeScene({ className }: HeroThreeSceneProps) {
     </div>
   );
 }
-
